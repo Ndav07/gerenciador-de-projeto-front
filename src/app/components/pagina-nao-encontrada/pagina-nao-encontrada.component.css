@@ -1,0 +1,31 @@
+.page .msg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 325px);
+  gap: 5rem;
+}
+
+.msg{
+  margin-top: 2rem;
+  height: 4rem;
+}
+
+.msg button{
+  height: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.msg button:hover{
+  background: #083D93;
+}

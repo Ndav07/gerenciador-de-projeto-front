@@ -1,0 +1,39 @@
+<div [@transicaoProjetos]="state" *ngFor="let projeto of projetos" class="proj">
+
+  <div *ngIf="!load" class="projeto">
+    <h2>{{ projeto.nome_projeto }}</h2>
+    <div>
+      <img class="excluir-equipe" src="../../../assets/excluir.svg" (click)="modalExclusao(projeto.id_projeto)">
+      <img routerLink="/editaProjeto/{{projeto.id_projeto}}" class="edit-equipe" src="../../../assets/edit.svg">
+    </div>
+
+    <h3>{{ projeto.nome_equipe }}</h3>
+
+    <app-lista-colaboradores></app-lista-colaboradores>
+
+    <div class="tarefas">
+      <h3>Tarefas</h3>
+      <app-lista-tarefas [tarefas]="tarefasOrganizadasPorProjeto[projeto.id_projeto]" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id_projeto" [id_equipe]="projeto.id_equipe"></app-lista-tarefas>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="load && !error" class="loadingdiv">
+  <p class="loading"></p>
+</div>
+
+<div class="errordiv" *ngIf="error">
+  <div class="error">
+    <h2>Erro!</h2>
+    <p>{{ error }}</p>
+  </div>
+</div>
+
+<app-confimar-exclusao
+*ngIf="modalExcluir"
+(fechaModal)="modalExclusao()"
+[mensagem]="mensagemExclusaoProjeto"
+[id]="idExlusaoProjeto"
+(deleta)="deletaProjeto($event)"
+></app-confimar-exclusao>

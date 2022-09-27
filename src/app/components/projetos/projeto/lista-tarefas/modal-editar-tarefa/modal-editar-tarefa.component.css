@@ -1,0 +1,147 @@
+.backgroud-modal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.boxForm{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 35rem;
+  height: 30rem;
+  border-radius: .5rem;
+  text-align: center;
+  background: #F4F5FA;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.boxForm h2{
+  color: #F56E28;
+  margin-bottom: 1rem;
+}
+
+.fechar{
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all ease 300ms;
+}
+
+.fechar:hover{
+  opacity: 1;
+}
+
+form{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nomeTarefa{
+  display: flex;
+  width: 25rem;
+  margin-bottom: 1rem;
+  width: 80%;
+  max-width: 25rem;
+}
+
+.nomeTarefa input{
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #F4F5FA;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.descricao{
+  width: 25rem;
+  height: 7.2rem;
+  margin-bottom: 1rem;
+  width: 80%;
+  max-width: 25rem;
+}
+
+.descricao textarea{
+  width: 100%;
+  height: 7rem;
+  max-height: 7rem;
+  border: none;
+  outline: none;
+  font-size: .8rem;
+  border-radius: .2rem;
+  resize: none;
+}
+
+.addColaborado{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.colaboradores{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 80%;
+  max-width: 25rem;
+  border-radius: .5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  background: #F4F5FA;
+  padding: .5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.colaboradores option{
+  font-size: 1rem;
+}
+
+.colaboradores option:hover{
+  background: #F56E28;
+  color: #ffff;
+}
+
+.erroValid{
+  margin-bottom: 1rem;
+  font-size: .8rem;
+  color: #f5282898;
+}
+
+.finalizar{
+  height: 4rem;
+}
+
+.finalizar button{
+  height: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.finalizar button:hover{
+  background: #083D93;
+}

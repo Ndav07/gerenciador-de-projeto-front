@@ -1,0 +1,16 @@
+<nav class="nav">
+  <h1>Gerenciador de Projetos</h1>
+  <ul>
+    <li><a routerLink="/projetos" routerLinkActive="active" data-testid="rotaProjeto" *ngIf="autenticacao">Projetos</a></li>
+    <li><a routerLink="/equipes" routerLinkActive="active" *ngIf="autenticacao">Equipes</a></li>
+    <!--
+    <div class="logout">
+      <li><a *ngIf="autenticacao">Logout</a></li>
+    </div>
+    -->
+  </ul>
+</nav>
+
+<div class="topLogo">
+  <img class="logo" src="../../../assets/Brisanet_logo.svg" alt="">
+</div>

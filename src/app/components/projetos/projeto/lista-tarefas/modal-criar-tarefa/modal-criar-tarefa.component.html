@@ -1,0 +1,37 @@
+<div class="backgroud-modal">
+  <div class="boxForm">
+    <img class="fechar" (click)="fechar()" src="../../../../../../assets/x.svg">
+    <h2>Nova Tarefa</h2>
+    <form [formGroup]="formTarefa" (ngSubmit)="onSubmit()">
+        <div class="nomeTarefa">
+            <input type="text" formControlName="nome_tarefa" placeholder="Digite o nome da tarefa">
+        </div>
+
+        <div *ngIf="!formTarefa.get('nome_tarefa')?.valid && formTarefa.get('nome_tarefa')?.touched">
+          <p class="erroValid">O nome da tarefa é obrigatório.</p>
+        </div>
+
+        <div class="descricao">
+          <textarea type="" formControlName="descricao" placeholder="Digite a descrição da tarefa"></textarea>
+        </div>
+
+        <div *ngIf="!formTarefa.get('descricao')?.valid && formTarefa.get('descricao')?.touched">
+          <p class="erroValid">Máximo de 300 caracteres.</p>
+        </div>
+
+        <div *ngIf="colaboradores.length > 0" class="addColaborado">
+          <h3>Colaborado</h3>
+        </div>
+
+        <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="id_colaborado">
+          <option value="" disabled selected hidden></option>
+          <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id_colaborado">{{colaborado.nome_colaborado}}</option>
+        </select>
+
+        <div class="finalizar">
+            <button *ngIf="!formTarefa.get('nome_tarefa')?.valid" disabled>Finalizar</button>
+            <button *ngIf="formTarefa.get('nome_tarefa')?.valid" type="submit">Finalizar</button>
+        </div>
+    </form>
+  </div>
+</div>

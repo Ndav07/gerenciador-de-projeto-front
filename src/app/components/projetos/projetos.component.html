@@ -1,0 +1,22 @@
+<div class="backgroud">
+  <div class="page">
+
+    <div class="top">
+      <div class="adicionar">
+        <button routerLink="/novoProjeto">Adicionar Projeto</button>
+      </div>
+
+      <div class="search">
+        <form>
+          <img src="../../../assets/search.svg" alt="">
+          <input type="text" placeholder="Busque Aqui..." data-testid="inputPesquisa" (input)="search($event)" (input)="filho.getProjetosFiltrados()">
+        </form>
+      </div>
+    </div>
+
+    <div class="projetos">
+      <app-projeto #filho (informacoesProjetos)="projetos($event)" [projFilter]="projetosFiltrados" ></app-projeto>
+    </div>
+
+  </div>
+</div>

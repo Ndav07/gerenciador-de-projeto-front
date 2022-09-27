@@ -1,0 +1,59 @@
+.lista-colaboradores{
+  display: flex;
+  width: 87.5vw;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.lista-colaboradores ul{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  border-radius: .3rem;
+  background: #F4F5FA;
+}
+
+.lista-colaboradores ul div{
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  padding: .3rem;
+}
+
+.lista-colaboradores ul div:last-child{
+  border-bottom: none;
+}
+
+.colaborado{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.foto-colaborador{
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #ffffff;
+  background-size: cover;
+  background-position: center;
+}
+
+.excluir-colaborado{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 590px){
+  .colaborado li{
+    font-size: .8rem;
+  }
+}

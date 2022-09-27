@@ -1,0 +1,10 @@
+<div class="lista-colaboradores">
+  <ul>
+    <div *ngFor="let colab of colaboradoresDaEquipe" class="colaborado">
+        <li class="foto-colaborador" style="background-image: url(../../../assets/people1.jpg)"></li>
+        <li> {{ colab.nome_colaborado }} </li>
+        <li> {{ colab.atribuicao }} </li>
+        <li><img class="excluir-colaborado" src="../../../assets/excluir.svg" (click)="deletarColaborado(colab.id_colaborado)"></li>
+    </div>
+  </ul>
+</div>

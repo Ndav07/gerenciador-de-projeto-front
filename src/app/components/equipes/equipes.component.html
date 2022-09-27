@@ -1,0 +1,23 @@
+<div class="backgroud">
+    <div class="page">
+
+      <div class="top">
+        <div class="adicionar">
+          <button routerLink="/novaEquipe">Adicionar Equipe</button>
+        </div>
+
+        <div class="search">
+          <form>
+            <img src="../../../assets/search.svg" alt="">
+            <input type="text" placeholder="Busque Aqui..." (input)="search($event)" (input)="filhoequipe.getEquipesFiltradas()">
+          </form>
+        </div>
+      </div>
+
+      <div class="equipes">
+        <app-equipe #filhoequipe (enviaAllEquipes)="equipes($event)" [equipesFiltradas]="equipesFiltradas"></app-equipe>
+      </div>
+
+    </div>
+  </div>
+

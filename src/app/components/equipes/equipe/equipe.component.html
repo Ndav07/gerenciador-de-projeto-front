@@ -1,0 +1,34 @@
+<div [@transicaoEquipes]="state" *ngFor="let equipe of equipes" class="equi">
+
+  <div *ngIf="!load" class="equipe">
+      <h2>{{ equipe.nome_equipe }}</h2>
+      <div>
+        <img class="excluir-equipe" src="../../../assets/excluir.svg" (click)="modalExclusao(equipe.id_equipe)">
+        <img routerLink="/editaEquipe/{{equipe.id_equipe}}" class="edit-equipe" src="../../../assets/edit.svg">
+      </div>
+      <ul class="colaboradores">
+        <li style="background-image: url(../../../assets/people3.jpg)"></li>
+        <li style="background-image: url(../../../assets/people1.jpg)"></li>
+        <li style="background-image: url(../../../assets/people2.jpg)"></li>
+        <li style="background-image: url(../../../assets/people1.jpg)"></li>
+        <li style="background-image: url(../../../assets/people2.jpg)"></li>
+        <li style="background-image: url(../../../assets/people6.jpg)"></li>
+      </ul>
+  </div>
+
+  <app-listar-colaboradores-equipe [colaboradoresDaEquipe]="colaboradores[equipe.id_equipe]" (recarregarColaboradores)="getEquipes()"></app-listar-colaboradores-equipe>
+
+</div>
+
+<div *ngIf="load" class="loadingdiv">
+  <p class="loading"></p>
+</div>
+
+
+<app-confimar-exclusao
+*ngIf="modalExcluir"
+(fechaModal)="modalExclusao()"
+[mensagem]="mensagemExclusaoEquipe"
+[id]="idExlusaoEquipe"
+(deleta)="deletaEquipe($event)"
+></app-confimar-exclusao>

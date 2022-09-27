@@ -1,0 +1,19 @@
+<div *ngIf="toggle" class="backgroud-modal">
+    <form class="addColaborador">
+        <img class="fechar" (click)="showEditColaborado()" src="../../../assets/x.svg">
+        <div class="foto">
+            <input type="file">
+        </div>
+        <div class="nome">
+            <label>Nome</label>
+            <input type="text" placeholder="nome do colaborador">
+        </div>
+        <div class="atribuicao">
+            <label>Atribuição</label>
+            <input type="text" placeholder="Sua atribuição">
+        </div>
+        <div class="add">
+            <button type="submit">Atualizar</button>
+        </div>
+    </form>
+</div>

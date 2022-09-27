@@ -1,0 +1,253 @@
+.page .criarNovaEquipe{
+  width: 100%;
+  min-height: calc(100vh - 260px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.criarNovaEquipe h2{
+  color: #F56E28;
+  margin-bottom: 1rem;
+}
+
+form{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.equipe{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nomeEquipe{
+  display: flex;
+  width: 25rem;
+  width: 80%;
+  max-width: 25rem;
+  margin-bottom: 1rem;
+}
+
+.nomeEquipe input{
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.erroValid{
+  font-size: .8rem;
+  color: #f5282898;
+}
+
+.colaboradores{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 90%;
+  border-radius: .5rem;
+  text-align: center;
+  background: #F4F5FA;
+  margin: 1rem 0rem;
+}
+
+.colaboradores h3{
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  padding: .5rem;
+}
+
+.infoColaborador{
+  display: flex;
+  align-items: center;
+  margin: .5rem .5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fotoDePerfil{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #083D93;
+  border-radius: 50%;
+}
+
+.fotoDePerfil img{
+  width: 2rem;
+  height: 2rem;
+}
+
+.options{
+  display: flex;
+  align-items: center;
+}
+
+.options img{
+  opacity: .8;
+  cursor: pointer;
+}
+
+.edit{
+  margin-right: 1rem;
+}
+
+.options img:hover{
+  opacity: 1;
+}
+
+.addEquipe{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.addEquipe img{
+  margin: .5rem 0rem;
+  opacity: .8;
+  cursor: pointer;
+}
+
+.addEquipe img:hover{
+  opacity: 1;
+}
+
+.addColaborador{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 90%;
+  max-width: 45rem;
+  border-radius: .5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  background: #F4F5FA;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.addColaborador div{
+  margin-bottom: .5rem;
+  cursor: pointer;
+  transition: all ease 300ms;
+  width: 90%;
+}
+
+.foto{
+  margin: 1rem;
+}
+
+.nome{
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.nome input{
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
+.atribuicao{
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.atribuicao input{
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
+.add button{
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: .5rem;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.add button:hover{
+  background: #083D93;
+}
+
+.finalizar{
+  margin-top: 2rem;
+  height: 4rem;
+}
+
+.finalizar button{
+  height: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.finalizar button:hover{
+  background: #083D93;
+}
+
+@media screen and (max-width: 590px){
+  .infoColaborador{
+    font-size: .8rem;
+  }
+
+  .fotoDePerfil{
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .fotoDePerfil img{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .edit{
+    margin: .5rem;
+  }
+
+  .foto input{
+    width: 80%;
+    font-size: .8rem;
+  }
+
+  .nome input{
+    font-size: .8rem;
+  }
+
+  .atribuicao input{
+    font-size: .8rem;
+  }
+}

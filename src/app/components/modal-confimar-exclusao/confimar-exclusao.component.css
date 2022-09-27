@@ -1,0 +1,66 @@
+.backgroud-modal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.msgExclusao{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 35rem;
+  height: 10rem;
+  border-radius: .5rem;
+  text-align: center;
+  background: #F4F5FA;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.opcoes{
+ display: flex;
+ gap: 1rem;
+ margin: 2rem;
+}
+
+.confirmar{
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: .5rem;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.confirmar:hover{
+  background: #083D93;
+}
+
+.negar{
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: .5rem;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F4F5FA;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: rgb(0, 0, 0);
+}
+
+.negar:hover{
+  background: #083D93;
+}

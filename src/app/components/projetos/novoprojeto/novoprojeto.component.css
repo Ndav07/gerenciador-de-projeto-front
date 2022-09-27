@@ -1,0 +1,102 @@
+.page .criarNovoProjeto{
+    width: 100%;
+    min-height: calc(100vh - 265px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.criarNovoProjeto h2{
+    color: #F56E28;
+    margin-bottom: 1rem;
+}
+
+form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nomeProjeto{
+    display: flex;
+    width: 25rem;
+    margin-bottom: 1rem;
+    width: 80%;
+    max-width: 25rem;
+}
+
+.nomeProjeto input{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.equipes{
+    border: rgba(0, 0, 0, 0.10) solid 1px;
+    width: 80%;
+    max-width: 25rem;
+    border-radius: .5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    background: #F4F5FA;
+    padding: .5rem;
+    outline: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.equipes option{
+    font-size: 1rem;
+}
+
+.equipes option:hover{
+    background: #F56E28;
+    color: #ffff;
+}
+
+.addEquipe{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.erroValid{
+  font-size: .8rem;
+  color: #f5282898;
+}
+
+.finalizar{
+    height: 4rem;
+}
+
+.finalizar button{
+    height: 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: .5rem;
+    border-radius: .3rem;
+    border: none;
+    background: #F56E28;
+    cursor: pointer;
+    transition: all ease 500ms;
+    color: #ffff;
+}
+
+.finalizar button:hover{
+    background: #083D93;
+}
+
+@media screen and (max-width: 390px){
+  .page .criarNovoProjeto{
+    min-height: calc(100vh - 250px);
+  }
+}

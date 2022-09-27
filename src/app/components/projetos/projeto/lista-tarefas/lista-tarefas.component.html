@@ -1,0 +1,74 @@
+<div class="tarefas">
+  <div class="tabela">
+
+    <div class="afazeres">
+      <div class="flex">
+        <h4>Afazeres</h4>
+        <img (click)="addTarefa(statusAfazeres)" src="../../../assets/add.svg">
+      </div>
+      <ul *ngFor="let tar of tarefas">
+          <div *ngIf="tar.status == 'afazeres'" class="top flex">
+              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <div class="flex">
+                <span>{{ tar.nome_colaborado }}</span>
+                <img class="colaborador-tarefa" src="../../../assets/icon.svg">
+                <img (click)="editTarefa(tar.id_tarefa, tar.nome_tarefa, tar.descricao, tar.id_colaborado, tar.nome_colaborado)" src="../../../assets/edit.svg">
+                <img (click)="mudarTarefaDeStatus(statusAfazeres, tar.id_tarefa)" src="../../../assets/seta-direita.svg">
+                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+              </div>
+          </div>
+      </ul>
+    </div>
+
+    <div class="andamento">
+      <div class="flex">
+        <h4>Andamento</h4>
+        <img (click)="addTarefa(statusAndamento)" src="../../../assets/add.svg">
+      </div>
+      <ul *ngFor="let tar of tarefas">
+          <div *ngIf="tar.status == 'andamento'" class="top flex">
+              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <div class="flex">
+                <span>{{ tar.nome_colaborado }}</span>
+                <img class="colaborador-tarefa" src="../../../assets/icon.svg">
+                <img (click)="editTarefa(tar.id_tarefa, tar.nome_tarefa, tar.descricao, tar.id_colaborado, tar.nome_colaborado)" src="../../../assets/edit.svg">
+                <img (click)="mudarTarefaDeStatus(statusAndamento, tar.id_tarefa)" src="../../../assets/seta-direita.svg">
+                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+              </div>
+          </div>
+      </ul>
+    </div>
+
+    <div class="concluidas">
+      <div class="flex">
+        <h4>Concluídas</h4>
+        <img (click)="addTarefa(statusConcluidas)" src="../../../assets/add.svg">
+      </div>
+      <ul *ngFor="let tar of tarefas">
+          <div *ngIf="tar.status == 'concluidas'" class="top flex">
+              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <div class="flex">
+                <span>{{ tar.nome_colaborado }}</span>
+                <img class="colaborador-tarefa" src="../../../assets/icon.svg">
+                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+              </div>
+          </div>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<app-modal-criar-tarefa *ngIf="criarTarefa"
+(fechaModal)="fechaCriacaodeTarefa()"
+(carregarTarefas)="pegarTarefas()"
+[id_projeto]="id_projeto"
+[id_equipe]="id_equipe"
+[status]="status"
+></app-modal-criar-tarefa>
+
+<app-modal-editar-tarefa *ngIf="editarTarefa"
+(fechaModal)="fechaEdicaodeTarefa()"
+(carregarTarefas)="pegarTarefasEdicao()"
+[tarefa]="tarefa"
+></app-modal-editar-tarefa>

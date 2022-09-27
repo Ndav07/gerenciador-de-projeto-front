@@ -1,0 +1,49 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Barlow', sans-serif;
+  overflow-x: hidden;
+}
+
+body{
+  background: #F4F5FA;
+}
+
+.backgroud{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page{
+  margin: 1rem 0rem 1rem 0rem;
+  width: 90%;
+  min-height: calc(100vh - 265px);
+  background: #ffff;
+}
+
+.adicionar{
+  border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+  height: 4rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
+}
+
+.adicionar button{
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0rem .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.adicionar button:hover{
+  background: #083D93;
+}
