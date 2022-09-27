@@ -12,13 +12,13 @@ import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/auth', pathMatch: 'full'},
+  {path: 'auth', component: AuthComponent},
   {path: 'projetos', component: ProjetosComponent},
   {path: 'equipes', component: EquipesComponent},
   {path: 'novoProjeto', component: NovoprojetoComponent},
   {path: 'novaEquipe', component: NovaequipeComponent},
   {path: 'editaEquipe/:id', component: EditaEquipeComponent},
   {path: 'editaProjeto/:id', component: EditaProjetoComponent},
-  {path: 'auth', component: AuthComponent},
   {path: 'pag-nao-encontrada', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: '/pag-nao-encontrada'}
 ];

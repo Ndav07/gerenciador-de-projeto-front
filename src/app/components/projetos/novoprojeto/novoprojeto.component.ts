@@ -4,9 +4,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
-import { Equipes } from 'src/app/interfaces/Equipes';
+import { Team } from 'src/app/interfaces/Team';
 
-import { ProjetosService } from 'src/app/services/projetos.service';
+import { ProjetosService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-novoprojeto',
@@ -14,7 +14,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
   styleUrls: ['./novoprojeto.component.css']
 })
 export class NovoprojetoComponent implements OnInit {
-  equipes: Equipes[] = [];
+  equipes: Team[] = [];
 
   idProjeto?: number;
 
@@ -24,28 +24,15 @@ export class NovoprojetoComponent implements OnInit {
 
   ngOnInit(): void{
     this.getEquipesSemProjetos();
-    this.getIdProjetos();
     this.formProjeto = new FormGroup({
-      'id_projeto': new FormControl(null),
-      'nome_projeto': new FormControl(null, Validators.required),
-      'id_equipe': new FormControl(null)
+      'idProjeto': new FormControl(null),
+      'name': new FormControl(null, Validators.required),
+      'idEquipe': new FormControl(null)
     });
   }
 
   getEquipesSemProjetos(){
     this.service.getEquipesSemProjetos().subscribe((equipes) => (this.equipes = equipes));
-  }
-
-  getIdProjetos(){
-    this.service.getMaxIdProjeto().subscribe({
-      next: (idProjeto) => {
-        if(idProjeto > 0){
-          this.idProjeto = Number(idProjeto) + 1;
-        } else {
-          this.idProjeto = 1;
-        }
-      }
-    });
   }
 
   onSubmit(){

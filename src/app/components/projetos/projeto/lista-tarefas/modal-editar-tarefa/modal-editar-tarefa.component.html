@@ -24,8 +24,8 @@
         </div>
 
         <select *ngIf="colaboradores.length > 1" class="colaboradores" formControlName="id_colaborado">
-          <option value="tarefa.id_colaborado" selected disabled>{{ tarefa.nome_colaborado }}</option>
-          <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id_colaborado">{{ colaborado.nome_colaborado }}</option>
+          <option value="tarefa.id_colaborado" selected disabled>{{ tarefa.name }}</option>
+          <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id">{{ colaborado.name }}</option>
         </select>
 
         <div class="finalizar">

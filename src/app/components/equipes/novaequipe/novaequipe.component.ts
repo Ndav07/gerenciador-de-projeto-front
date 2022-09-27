@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EquipesService } from 'src/app/services/equipes.service';
+import { EquipesService } from 'src/app/services/team.service';
 
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
-import { Colaborador } from 'src/app/interfaces/Contributor';
+import { Contributor } from 'src/app/interfaces/Contributor';
 
 
 @Component({
@@ -22,35 +22,21 @@ export class NovaequipeComponent implements OnInit {
 
   idEquipe?: number;
 
-  colaboradoresAssociados: Colaborador[] = [];
+  colaboradoresAssociados: Contributor[] = [];
 
   constructor(private service: EquipesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getIdEquipe();
     this.formEquipe = new FormGroup({
-      'id_equipe': new FormControl(null),
-      'nome_equipe': new FormControl(null, Validators.required),
-      'colaboradores': new FormArray([])
+      'id': new FormControl(null),
+      'name': new FormControl(null, Validators.required),
+      'contributors': new FormArray([])
     });
 
     this.formColaborado = new FormGroup({
-      'nome_colaborado': new FormControl(null, Validators.required),
-      'atribuicao': new FormControl(null),
-      'id_equipe': new FormControl(null),
-      'url_img': new FormControl(null)
-    });
-  }
-
-  getIdEquipe(){
-    this.service.getMaxIdEquipe().subscribe({
-      next: (equipes) => {
-        if(equipes > 0){
-          this.idEquipe = Number(equipes) + 1;
-        } else {
-          this.idEquipe = 1;
-        }
-      }
+      'name': new FormControl(null, Validators.required),
+      'office': new FormControl(null),
+      'team': new FormControl(null)
     });
   }
 
@@ -73,12 +59,11 @@ export class NovaequipeComponent implements OnInit {
   onSubmit(){
     for(let j in this.colaboradoresAssociados){
       this.formColaborado = new FormGroup({
-        'nome_colaborado': new FormControl(this.colaboradoresAssociados[j].nome_colaborado),
-        'atribuicao': new FormControl(this.colaboradoresAssociados[j].atribuicao),
-        'id_equipe': new FormControl(this.colaboradoresAssociados[j].id_equipe),
-        'url_img': new FormControl(this.colaboradoresAssociados[j].url_img)
+        'name': new FormControl(this.colaboradoresAssociados[j].name),
+        'office': new FormControl(this.colaboradoresAssociados[j].office),
+        'team': new FormControl(this.colaboradoresAssociados[j].team)
       });
-      (<FormArray>this.formEquipe.get('colaboradores')).push(this.formColaborado);
+      (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
     }
     this.formEquipe.value.id_equipe = this.idEquipe;
     this.service.postCriaEquipe(this.formEquipe.value).subscribe({

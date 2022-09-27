@@ -19,10 +19,10 @@
                 <div class="fotoDePerfil">
                   <img src="../../../../assets/icon.svg">
                 </div>
-                <p>{{ colab.nome_colaborado }}<p>
-                <p>{{ colab.atribuicao }}</p>
+                <p>{{ colab.name }}<p>
+                <p>{{ colab.office }}</p>
                 <div class="options">
-                  <img src="../../../assets/excluir.svg" (click)="excluirColaboradoDaEquipe(colab.id_colaborado || colab.nome_colaborado)">
+                  <img src="../../../assets/excluir.svg" (click)="excluirColaboradoDaEquipe(colab.id || colab.name)">
                 </div>
               </div>
             </div>

@@ -2,11 +2,11 @@ import { Component, OnInit, EventEmitter, Input, Output  } from '@angular/core';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { Colaborador } from 'src/app/interfaces/Contributor';
+import { Contributor } from 'src/app/interfaces/Contributor';
 
-import { Equipes } from 'src/app/interfaces/Equipes';
+import { Team } from 'src/app/interfaces/Team';
 
-import { EquipesService } from 'src/app/services/equipes.service';
+import { EquipesService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-equipe',
@@ -25,11 +25,11 @@ import { EquipesService } from 'src/app/services/equipes.service';
   ]
 })
 export class EquipeComponent implements OnInit {
-  @Output() enviaAllEquipes: EventEmitter<Equipes[]> = new EventEmitter();
-  @Input() equipesFiltradas!: Equipes[];
+  @Output() enviaAllEquipes: EventEmitter<Team[]> = new EventEmitter();
+  @Input() equipesFiltradas!: Team[];
 
-  equipes: Equipes[] = [];
-  colaboradores: Colaborador[] = [];
+  equipes: Team[] = [];
+  colaboradores: Contributor[] = [];
 
   state = 'inicio';
 
@@ -37,34 +37,36 @@ export class EquipeComponent implements OnInit {
 
   modalExcluir: boolean = false;
 
-  idExlusaoEquipe: number = 0;
+  idExlusaoEquipe?: string;
 
   mensagemExclusaoEquipe: string = "Você realmente quer apagar a Equipe?";
 
   constructor(private equipesService: EquipesService) { }
 
   ngOnInit(): void {
-    this.getEquipes();
+   this.getEquipes();
   }
+
 
   getEquipes(): void{
     this.equipesService.getAll().subscribe({
       next: (equipes) => (this.equipes = equipes),
       complete: () => {
         this.enviaAllEquipes.emit(this.equipes);
-        this.getColaboradores();
+        //this.getColaboradores();
       }
     })
   }
 
+  /*
   getColaboradores(): void{
     this.equipesService.getcolaboradoresdaEquipe().subscribe({
       next: (colaboradores) => {
         this.colaboradores = colaboradores.reduce((colab: any, colabAtual: any) => {
-          if(!colab[colabAtual.id_equipe]){
-            colab[colabAtual.id_equipe] = [];
+          if(!colab[colabAtual.id]){
+            colab[colabAtual.id] = [];
           }
-          colab[colabAtual.id_equipe].push(colabAtual);
+          colab[colabAtual.id].push(colabAtual);
           return colab;
           }, {})
       },
@@ -74,23 +76,25 @@ export class EquipeComponent implements OnInit {
       }
     })
   }
+  */
 
   getEquipesFiltradas(){
     this.equipes = this.equipesFiltradas;
   }
 
-  deletaEquipe(id_equipe: number){
-    this.equipesService.deleteEquipe(id_equipe).subscribe({
+  deletaEquipe(id: string){
+    this.equipesService.deleteEquipe(id).subscribe({
       complete: () => {
         this.getEquipes();
       }
     });
   }
 
-  modalExclusao(id_equipe?: number){
-    if(id_equipe){
-      this.idExlusaoEquipe = id_equipe;
+  modalExclusao(id?: string){
+    if(id){
+      this.idExlusaoEquipe = id;
     }
     this.modalExcluir = !this.modalExcluir;
   }
+
 }

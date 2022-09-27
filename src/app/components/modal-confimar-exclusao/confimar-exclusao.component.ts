@@ -9,8 +9,8 @@ export class ConfimarExclusaoComponent implements OnInit {
   @Output() fechaModal: EventEmitter<Event> = new EventEmitter();
 
   @Input() mensagem?: string;
-  @Input() id: any;
-  @Output() deleta: EventEmitter<number> = new EventEmitter();
+  @Input() id?: string;
+  @Output() deleta: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 

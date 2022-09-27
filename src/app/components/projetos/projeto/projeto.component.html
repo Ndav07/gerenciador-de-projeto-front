@@ -1,20 +1,22 @@
 <div [@transicaoProjetos]="state" *ngFor="let projeto of projetos" class="proj">
 
   <div *ngIf="!load" class="projeto">
-    <h2>{{ projeto.nome_projeto }}</h2>
+    <h2>{{ projeto.name }}</h2>
     <div>
-      <img class="excluir-equipe" src="../../../assets/excluir.svg" (click)="modalExclusao(projeto.id_projeto)">
-      <img routerLink="/editaProjeto/{{projeto.id_projeto}}" class="edit-equipe" src="../../../assets/edit.svg">
+      <img class="excluir-equipe" src="../../../assets/excluir.svg" (click)="modalExclusao(projeto.id)">
+      <img routerLink="/editaProjeto/{{projeto.id}}" class="edit-equipe" src="../../../assets/edit.svg">
     </div>
 
-    <h3>{{ projeto.nome_equipe }}</h3>
+    <!--Name da Equipe <h3>{{ projeto.name }}</h3> -->
 
     <app-lista-colaboradores></app-lista-colaboradores>
 
+    <!--
     <div class="tarefas">
       <h3>Tarefas</h3>
-      <app-lista-tarefas [tarefas]="tarefasOrganizadasPorProjeto[projeto.id_projeto]" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id_projeto" [id_equipe]="projeto.id_equipe"></app-lista-tarefas>
+      <app-lista-tarefas [tarefas]="tarefasOrganizadasPorProjeto[projeto.id]" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id" [id_equipe]="projeto.idEquipe"></app-lista-tarefas>
     </div>
+    -->
   </div>
 
 </div>

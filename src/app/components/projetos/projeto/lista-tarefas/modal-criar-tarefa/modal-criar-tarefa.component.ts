@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Colaborador } from 'src/app/interfaces/Contributor';
+import { Contributor} from 'src/app/interfaces/Contributor';
 
-import { ProjetosService } from 'src/app/services/projetos.service';
+import { ProjetosService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-modal-criar-tarefa',
@@ -12,8 +12,8 @@ import { ProjetosService } from 'src/app/services/projetos.service';
   styleUrls: ['./modal-criar-tarefa.component.css']
 })
 export class ModalCriarTarefaComponent implements OnInit {
-  @Input() id_projeto!: number;
-  @Input() id_equipe?: number;
+  @Input() id_projeto!: string;
+  @Input() id_equipe?: string;
   @Input() status!: string;
 
   @Output() fechaModal: EventEmitter<Event> = new EventEmitter();
@@ -22,14 +22,13 @@ export class ModalCriarTarefaComponent implements OnInit {
 
   formTarefa!: FormGroup;
 
-  colaboradores: Colaborador[] = [];
+  colaboradores: Contributor[] = [];
 
-  idTarefa?: number;
+  idTarefa?: string;
 
   constructor(private service: ProjetosService) { }
 
   ngOnInit(): void {
-    this.getIdTarefas();
     this.getColaboradoresdaEquipe();
     this.formTarefa = new FormGroup({
       'id_tarefa': new FormControl(null),
@@ -38,18 +37,6 @@ export class ModalCriarTarefaComponent implements OnInit {
       'nome_tarefa': new FormControl(null, Validators.required),
       'descricao': new FormControl(null, Validators.maxLength(300)),
       'status': new FormControl(this.status)
-    });
-  }
-
-  getIdTarefas(){
-    this.service.getMaxIdTarefa().subscribe({
-      next: (tarefas) => {
-        if(tarefas > 0){
-          this.idTarefa = Number(tarefas) + 1;
-        } else {
-          this.idTarefa = 1;
-        }
-      }
     });
   }
 

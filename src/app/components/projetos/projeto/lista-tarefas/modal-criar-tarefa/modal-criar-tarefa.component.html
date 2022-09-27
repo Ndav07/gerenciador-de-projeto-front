@@ -25,7 +25,7 @@
 
         <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="id_colaborado">
           <option value="" disabled selected hidden></option>
-          <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id_colaborado">{{colaborado.nome_colaborado}}</option>
+          <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id">{{colaborado.name}}</option>
         </select>
 
         <div class="finalizar">

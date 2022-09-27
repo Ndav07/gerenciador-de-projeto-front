@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Equipes } from 'src/app/interfaces/Equipes';
+import { Team } from 'src/app/interfaces/Team';
 
 @Component({
   selector: 'app-equipes',
@@ -7,15 +7,15 @@ import { Equipes } from 'src/app/interfaces/Equipes';
   styleUrls: ['./equipes.component.css']
 })
 export class EquipesComponent implements OnInit {
-  equipesAll: Equipes[] = [];
-  equipesFiltradas: Equipes[] = []
+  equipesAll: Team[] = [];
+  equipesFiltradas: Team[] = []
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  equipes(equipes: Equipes[]){
+  equipes(equipes: Team[]){
     this.equipesAll = equipes;
   }
 
@@ -23,7 +23,7 @@ export class EquipesComponent implements OnInit {
     const target = e.target as HTMLInputElement;
     const value = target.value.toLocaleLowerCase();
     this.equipesFiltradas = this.equipesAll.filter(equip => {
-      return equip.nome_equipe.toLocaleLowerCase().includes(value)
+      return equip.name.toLocaleLowerCase().includes(value)
     });
   }
 

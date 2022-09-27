@@ -2,10 +2,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Projetos } from 'src/app/interfaces/Projetos';
-import { Tarefas } from 'src/app/interfaces/Tarefas';
+import { Project } from 'src/app/interfaces/Project';
+import { Task } from 'src/app/interfaces/Task';
 
-import { ProjetosService } from '../../../services/projetos.service';
+import { ProjetosService } from '../../../services/project.service';
 
 @Component({
   selector: 'app-projeto',
@@ -24,14 +24,12 @@ import { ProjetosService } from '../../../services/projetos.service';
   ]
 })
 export class ProjetoComponent implements OnInit {
-  @Output() informacoesProjetos: EventEmitter<Projetos[]> = new EventEmitter();
-  @Input() projFilter: Projetos[] = [];
+  @Output() informacoesProjetos: EventEmitter<Project[]> = new EventEmitter();
+  @Input() projFilter: Project[] = [];
 
   state = 'inicio';
 
-  projetos: Projetos[] = [];
-
-  tarefasOrganizadasPorProjeto: any = [];
+  projetos: Project[] = [];
 
   load: boolean = true;
 
@@ -39,7 +37,7 @@ export class ProjetoComponent implements OnInit {
 
   modalExcluir: boolean = false;
 
-  idExlusaoProjeto: number = 0;
+  idExlusaoProjeto?: string;
 
   mensagemExclusaoProjeto: string = "Você realmente quer apagar o Projeto?";
 
@@ -63,43 +61,21 @@ export class ProjetoComponent implements OnInit {
       },
       complete: () => {
         this.informacoesProjetos.emit(this.projetos);
-        this.getTarefas();
       }
     });
   }
 
-  getTarefas(){
-    this.projetosService.getTarefas().subscribe({
-      next: (tarefas) => {
-        this.tarefasOrganizadasPorProjeto = tarefas.reduce((tar: any, tarAtual: Tarefas) => {
-          if(!tar[tarAtual.id_projeto]){
-            tar[tarAtual.id_projeto] = [];
-          }
-          tar[tarAtual.id_projeto].push(tarAtual);
-          return tar;
-          }, {})
-      },
-      error: (e) => {
-        this.error = e.message;
-      },
-      complete: () => {
-        this.load = false;
-        this.state = 'final';
-      }
-    });
-  }
-
-  deletaProjeto(id_projeto: number){
-    this.projetosService.deleteProjeto(id_projeto).subscribe({
+  deletaProjeto(id: string){
+    this.projetosService.deleteProjeto(id).subscribe({
       complete: () => {
         this.getProjetos();
       }
     });
   }
 
-  modalExclusao(id_projeto?: number){
-    if(id_projeto){
-      this.idExlusaoProjeto = id_projeto;
+  modalExclusao(id?: string){
+    if(id){
+      this.idExlusaoProjeto = id;
     }
     this.modalExcluir = !this.modalExcluir;
   }

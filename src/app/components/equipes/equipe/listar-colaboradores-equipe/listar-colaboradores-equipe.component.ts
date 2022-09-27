@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { EquipesService } from 'src/app/services/equipes.service';
+import { EquipesService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-listar-colaboradores-equipe',
@@ -9,7 +9,7 @@ import { EquipesService } from 'src/app/services/equipes.service';
 })
 export class ListarColaboradoresEquipeComponent implements OnInit {
 
-  @Input() colaboradoresDaEquipe: any;
+  @Input() colaboradoresDaEquipe?: any;
   @Output() recarregarColaboradores: EventEmitter<Event> = new EventEmitter();
 
   constructor(private service: EquipesService) { }
@@ -18,8 +18,8 @@ export class ListarColaboradoresEquipeComponent implements OnInit {
 
   }
 
-  deletarColaborado(id_colaborado: number){
-    this.service.deleteColaborado(id_colaborado).subscribe({
+  deletarColaborado(id: string){
+    this.service.deleteColaborado(id).subscribe({
       complete: () => {
         this.recarregarColaboradores.emit();
       }

@@ -5,10 +5,10 @@
             <h2>Novo projeto</h2>
             <form [formGroup]="formProjeto" (ngSubmit)="onSubmit()">
                 <div class="nomeProjeto">
-                    <input type="text" formControlName="nome_projeto" placeholder="Digite o nome do projeto">
+                    <input type="text" formControlName="name" placeholder="Digite o nome do projeto">
                 </div>
 
-                <div *ngIf="!formProjeto.get('nome_projeto')?.valid && formProjeto.get('nome_projeto')?.touched">
+                <div *ngIf="!formProjeto.get('name')?.valid && formProjeto.get('name')?.touched">
                   <p class="erroValid">O nome do projeto é obrigatório.</p>
                 </div>
 
@@ -18,12 +18,12 @@
 
                 <select class="equipes" formControlName="id_equipe">
                     <option value="" disabled selected hidden>Selecione a equipe</option>
-                    <option *ngFor="let equipe of equipes" [value]="equipe.id_equipe">{{equipe.nome_equipe}}</option>
+                    <option *ngFor="let equipe of equipes" [value]="equipe.id">{{equipe.name}}</option>
                 </select>
 
                 <div class="finalizar">
-                    <button *ngIf="!formProjeto.get('nome_projeto')?.valid" disabled>Finalizar</button>
-                    <button *ngIf="formProjeto.get('nome_projeto')?.valid" type="submit">Finalizar</button>
+                    <button *ngIf="!formProjeto.get('name')?.valid" disabled>Finalizar</button>
+                    <button *ngIf="formProjeto.get('name')?.valid" type="submit">Finalizar</button>
                 </div>
             </form>
         </div>

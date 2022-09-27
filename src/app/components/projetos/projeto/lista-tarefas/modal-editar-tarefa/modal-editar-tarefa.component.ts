@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Colaborador } from 'src/app/interfaces/Contributor';
+import { Contributor } from 'src/app/interfaces/Contributor';
 
-import { ProjetosService } from 'src/app/services/projetos.service';
+import { ProjetosService } from 'src/app/services/project.service';
 
-import { Tarefas } from 'src/app/interfaces/Tarefas';
+import { Task } from 'src/app/interfaces/Task';
 
 @Component({
   selector: 'app-modal-editar-tarefa',
@@ -14,31 +14,33 @@ import { Tarefas } from 'src/app/interfaces/Tarefas';
   styleUrls: ['./modal-editar-tarefa.component.css']
 })
 export class ModalEditarTarefaComponent implements OnInit {
-  @Input() tarefa!: Tarefas;
+  @Input() tarefa!: Task;
 
   @Output() carregarTarefas: EventEmitter<Event> = new EventEmitter();
   @Output() fechaModal: EventEmitter<Event> = new EventEmitter();
 
   formTarefa!: FormGroup;
 
-  colaboradores: Colaborador[] = [];
+  colaboradores: Contributor[] = [];
 
   constructor(private service: ProjetosService) { }
 
   ngOnInit(): void {
     this.getColaboradoresdaEquipe();
     this.formTarefa = new FormGroup({
-      'id_tarefa': new FormControl(this.tarefa.id_tarefa),
-      'id_colaborado': new FormControl(this.tarefa.id_colaborado),
-      'nome_tarefa': new FormControl(this.tarefa.nome_tarefa, Validators.required),
-      'descricao': new FormControl(this.tarefa.descricao, Validators.maxLength(300))
+      'id_tarefa': new FormControl(this.tarefa.id),
+      'id_colaborado': new FormControl(this.tarefa.contribuidor),
+      'nome_tarefa': new FormControl(this.tarefa.name, Validators.required),
+      'descricao': new FormControl(this.tarefa.description, Validators.maxLength(300))
     });
   }
 
   getColaboradoresdaEquipe(){
+    /*
     if(this.tarefa.id_equipe){
       this.service.getColaboradoresdaEquipe(this.tarefa.id_equipe).subscribe((colaboradores) => (this.colaboradores = colaboradores));
     }
+    */
   }
 
   onSubmit(){
@@ -48,10 +50,10 @@ export class ModalEditarTarefaComponent implements OnInit {
   editarTarefa(){
     this.service.putTarefa(this.formTarefa.value).subscribe({
       complete: () => {
-        if(this.tarefa.id_colaborado === null && this.formTarefa.value.id_colaborado !== this.tarefa.id_colaborado){
+        if(this.tarefa.contribuidor === null && this.formTarefa.value.id_colaborado !== this.tarefa.contribuidor){
           this.criaColaboradorEmTarefa();
         }
-        else if(this.formTarefa.value.id_colaborado !== this.tarefa.id_colaborado){
+        else if(this.formTarefa.value.id_colaborado !== this.tarefa.contribuidor){
           this.associaColaboradorEmTarefa();
         } else {
           this.carregarTarefas.emit();

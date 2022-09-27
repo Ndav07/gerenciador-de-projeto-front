@@ -4,11 +4,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Equipes } from 'src/app/interfaces/Equipes';
+import { Team } from 'src/app/interfaces/Team';
 
-import { Projetos } from 'src/app/interfaces/Projetos';
+import { Project } from 'src/app/interfaces/Project';
 
-import { ProjetosService } from 'src/app/services/projetos.service';
+import { ProjetosService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-edita-projeto',
@@ -16,9 +16,9 @@ import { ProjetosService } from 'src/app/services/projetos.service';
   styleUrls: ['./edita-projeto.component.css']
 })
 export class EditaProjetoComponent implements OnInit {
-  equipes: Equipes[] = [];
+  equipes: Team[] = [];
 
-  projeto!: Projetos[];
+  projeto!: Project[];
 
   formProjeto!: FormGroup;
 
@@ -31,21 +31,22 @@ export class EditaProjetoComponent implements OnInit {
   }
 
   getProjetosId(){
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = String(this.route.snapshot.paramMap.get('id'));
     this.service.getProjetoId(id).subscribe({
       next: (projeto) => {
         this.projeto = projeto;
       },
       complete: () => {
         this.formProjeto = new FormGroup({
-          'id_projeto': new FormControl(this.projeto[0].id_projeto),
-          'nome_projeto': new FormControl(this.projeto[0].nome_projeto, Validators.required),
-          'id_equipe': new FormControl(this.projeto[0].id_equipe)
+          'id_projeto': new FormControl(this.projeto[0].id),
+          'nome_projeto': new FormControl(this.projeto[0].name, Validators.required),
+          'id_equipe': new FormControl(this.projeto[0])
+          //Fazera modelarem para pegar o id da equipe
         });
         this.formProjetoAntigo = new FormGroup({
-          'id_projeto': new FormControl(this.projeto[0].id_projeto),
-          'nome_projeto': new FormControl(this.projeto[0].nome_projeto),
-          'id_equipeAntiga': new FormControl(this.projeto[0].id_equipe)
+          'id_projeto': new FormControl(this.projeto[0].id),
+          'nome_projeto': new FormControl(this.projeto[0].name),
+          'id_equipeAntiga': new FormControl(this.projeto[0])
         });
         this.getEquipesSemProjetos();
       }
@@ -57,13 +58,15 @@ export class EditaProjetoComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.projeto[0].id_equipe === null && this.formProjeto.value.id_equipe !== this.projeto[0].id_equipe){
+    /*
+    if(this.projeto[0]=== null && this.formProjeto.value.id_equipe !== this.projeto[0].id_equipe){
       this.putAssociarProjetoEquipe();
     } else if(this.formProjeto.value.id_equipe !== null && this.formProjeto.value.id_equipe !== this.projeto[0].id_equipe){
       this.putLimparCampoProjetoDaEquipeAntiga();
     } else{
       this.putProjeto();
     }
+    */
   }
 
   putProjeto() {

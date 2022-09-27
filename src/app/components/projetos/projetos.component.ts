@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Projetos } from 'src/app/interfaces/Projetos';
+import { Project } from 'src/app/interfaces/Project';
 
 
 @Component({
@@ -8,15 +8,15 @@ import { Projetos } from 'src/app/interfaces/Projetos';
   styleUrls: ['./projetos.component.css']
 })
 export class ProjetosComponent implements OnInit {
-  projetosAll: Projetos[] = [];
-  projetosFiltrados: Projetos[] = [];
+  projetosAll: Project[] = [];
+  projetosFiltrados: Project[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  projetos(proj: Projetos[]){
+  projetos(proj: Project[]){
     this.projetosAll = proj;
   }
 
@@ -24,7 +24,7 @@ export class ProjetosComponent implements OnInit {
     const target = e.target as HTMLInputElement;
     const value = target.value.toLocaleLowerCase();
     this.projetosFiltrados = this.projetosAll.filter(projet => {
-      return projet.nome_projeto.toLocaleLowerCase().includes(value)
+      return projet.name.toLocaleLowerCase().includes(value)
     });
   }
 }

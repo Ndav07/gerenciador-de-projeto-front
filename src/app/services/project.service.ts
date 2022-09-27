@@ -25,7 +25,6 @@ export class ProjetosService {
   private baseApiUrl = "http://localhost:3333/";
 
 
-  /*
 
   //GET
   private projetos = `${this.baseApiUrl}`;
@@ -71,32 +70,32 @@ export class ProjetosService {
 
   constructor(private http: HttpClient) { }
 
-  getProjetos(): Observable<Projetos[]> {
-    return this.http.get<Projetos[]>(this.projetos);
+  getProjetos(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projetos);
   }
 
-  getProjetoId(id: number): Observable<Projetos[]> {
-    return this.http.get<Projetos[]>(`${this.projeto}${id}`);
+  getProjetoId(id: string): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.projeto}${id}`);
   }
 
   getMaxIdProjeto(){
     return this.http.get(this.maxIdProjeto);
   }
 
-  getTarefas(): Observable<Tarefas[]> {
-    return this.http.get<Tarefas[]>(`${this.tarefas}`);
+  getTarefas(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.tarefas}`);
   }
 
   getMaxIdTarefa(){
     return this.http.get(this.maxIdTarefa);
   }
 
-  getEquipesSemProjetos(): Observable<Equipes[]> {
-    return this.http.get<Equipes[]>(this.equipesSemProjetos);
+  getEquipesSemProjetos(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.equipesSemProjetos);
   }
 
-  getColaboradoresdaEquipe(id_equipe: number): Observable<Colaborador[]> {
-    return this.http.get<Colaborador[]>(`${this.colaboradoresdaEquipe}${id_equipe}`);
+  getColaboradoresdaEquipe(id: string): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.colaboradoresdaEquipe}${id}`);
   }
 
   postCriarProjeto(formGroup: FormGroup): Observable<FormGroup> {
@@ -127,7 +126,7 @@ export class ProjetosService {
     return this.http.put<FormGroup>(this.editaEquipeProjeto, formGroup);
   }
 
-  putMudarStatusDeTarefa(tarefa: Tarefas){
+  putMudarStatusDeTarefa(tarefa: Task){
     return this.http.put(`${this.mudarStatusDeTarefa}`, tarefa);
   }
 
@@ -139,12 +138,11 @@ export class ProjetosService {
     return this.http.put<FormGroup>(this.editaColaboradoEmTarefa, formGroup);
   }
 
-  deleteProjeto(id_projeto: number){
-    return this.http.delete(`${this.deletaProjeto}${id_projeto}`);
+  deleteProjeto(id: string){
+    return this.http.delete(`${this.deletaProjeto}${id}`);
   }
 
-  deleteTarefa(id_tarefa: number){
-    return this.http.delete(`${this.deletaTarefa}${id_tarefa}`);
+  deleteTarefa(id: string){
+    return this.http.delete(`${this.deletaTarefa}${id}`);
   }
-  */
 }

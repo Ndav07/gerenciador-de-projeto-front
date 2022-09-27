@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -21,11 +20,6 @@ export class EquipesService {
   //private baseApiUrl = environment.baseApiUrl;
   private baseApiUrl = "http://localhost:3333/";
 
-
-
-
-
-  /*
   //GET
   private equipes = `${this.baseApiUrl}equipes/`;
 
@@ -52,24 +46,24 @@ export class EquipesService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Equipes[]> {
-    return this.http.get<Equipes[]>(this.equipes);
+  getAll(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.equipes);
   }
 
-  getcolaboradoresdaEquipe(): Observable<Colaborador[]> {
-    return this.http.get<Colaborador[]>(`${this.colaboradores}`);
+  getcolaboradoresdaEquipe(): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.colaboradores}`);
   }
 
-  getEquipeId(id: number): Observable<Equipes[]>{
-    return this.http.get<Equipes[]>(`${this.equipeId}${id}`);
+  getEquipeId(id: string): Observable<Team[]>{
+    return this.http.get<Team[]>(`${this.equipeId}${id}`);
   }
 
   getMaxIdEquipe(){
     return this.http.get(this.maxIdEquipe);
   }
 
-  getColaboradoresdaEquipe(id_equipe: number): Observable<Colaborador[]> {
-    return this.http.get<Colaborador[]>(`${this.colaboradoresdaEquipe}${id_equipe}`);
+  getColaboradoresdaEquipe(id: string): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.colaboradoresdaEquipe}${id}`);
   }
 
   postCriaEquipe(formGroup: FormGroup): Observable<FormGroup> {
@@ -86,12 +80,12 @@ export class EquipesService {
     return this.http.put<FormGroup>(`${this.editarEquipe}`, formGroup);
   }
 
-  deleteEquipe(id_equipe: number){
-    return this.http.delete(`${this.deletaEquipe}${id_equipe}`);
+  deleteEquipe(id: string){
+    return this.http.delete(`${this.deletaEquipe}${id}`);
   }
 
-  deleteColaborado(id_colaborado: number){
-    return this.http.delete(`${this.deletaColaborado}${id_colaborado}`);
+  deleteColaborado(id: string){
+    return this.http.delete(`${this.deletaColaborado}${id}`);
   }
-  */
+
 }

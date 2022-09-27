@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Tarefas } from 'src/app/interfaces/Tarefas';
+import { Task } from 'src/app/interfaces/Task';
 
-import { ProjetosService } from 'src/app/services/projetos.service';
+import { ProjetosService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-lista-tarefas',
@@ -10,9 +10,9 @@ import { ProjetosService } from 'src/app/services/projetos.service';
   styleUrls: ['./lista-tarefas.component.css']
 })
 export class ListaTarefasComponent implements OnInit {
-  @Input() tarefas: Tarefas[] = [];
-  @Input() id_projeto!: number;
-  @Input() id_equipe?: number;
+  @Input() tarefas: Task[] = [];
+  @Input() id_projeto!: string;
+  @Input() id_equipe?: string;
 
   @Output() getTarefasProjeto: EventEmitter<Event> = new EventEmitter;
 
@@ -75,8 +75,8 @@ export class ListaTarefasComponent implements OnInit {
     });
   }
 
-  deletarTarefa(id_tarefa: number){
-    this.service.deleteTarefa(id_tarefa).subscribe({
+  deletarTarefa(id: string){
+    this.service.deleteTarefa(id).subscribe({
       complete: () => {
         this.getTarefasProjeto.emit();
       }

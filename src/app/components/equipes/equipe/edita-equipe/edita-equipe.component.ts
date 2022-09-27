@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EquipesService } from 'src/app/services/equipes.service';
+import { EquipesService } from 'src/app/services/team.service';
 
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Equipes } from 'src/app/interfaces/Equipes';
-import { Colaborador } from 'src/app/interfaces/Contributor';
+import { Team } from 'src/app/interfaces/Team';
+import { Contributor } from 'src/app/interfaces/Contributor';
 
 @Component({
   selector: 'app-edita-equipe',
@@ -17,34 +17,34 @@ import { Colaborador } from 'src/app/interfaces/Contributor';
 export class EditaEquipeComponent implements OnInit {
   formEquipe!: FormGroup;
 
-  equipe!: Equipes[];
+  equipe!: Team[];
 
   formColaborado!: FormGroup;
 
-  idEquipe!: number;
+  idEquipe!: string;
 
-  colaboradoresAssociados: Colaborador[] = [];
+  colaboradoresAssociados: Contributor[] = [];
 
-  colaboradoresNovos: Colaborador[] = [];
+  colaboradoresNovos: Contributor[] = [];
 
   constructor(private service: EquipesService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getEquipe();
     this.formColaborado = new FormGroup({
-      'nome_colaborado': new FormControl(null, Validators.required),
-      'atribuicao': new FormControl(null),
-      'id_equipe': new FormControl(null)
+      'name': new FormControl(null, Validators.required),
+      'office': new FormControl(null),
+      'team': new FormControl(null)
     });
     this.formEquipe = new FormGroup({
-      'id_equipe': new FormControl(null),
-      'nome_equipe': new FormControl(null, Validators.required),
-      'colaboradores': new FormArray([])
+      'id': new FormControl(null),
+      'name': new FormControl(null, Validators.required),
+      'contributors': new FormArray([])
     });
   }
 
   getEquipe(){
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = String(this.route.snapshot.paramMap.get('id'));
     this.idEquipe = id;
     this.service.getEquipeId(this.idEquipe).subscribe({
       next: (equipe) => {
@@ -52,9 +52,9 @@ export class EditaEquipeComponent implements OnInit {
       },
       complete: () => {
         this.formEquipe = new FormGroup({
-          'id_equipe': new FormControl(this.equipe[0].id_equipe),
-          'nome_equipe': new FormControl(this.equipe[0].nome_equipe, Validators.required),
-          'colaboradores': new FormArray([])
+          'id': new FormControl(this.equipe[0].id),
+          'name': new FormControl(this.equipe[0].name, Validators.required),
+          'contributors': new FormArray([])
         });
         this.getColaboradoresDaEquipe();
       }
@@ -79,7 +79,9 @@ export class EditaEquipeComponent implements OnInit {
     this.formColaborado.reset();
   }
 
-  excluirColaboradoDaEquipe(colab: string | number){
+  excluirColaboradoDaEquipe(colab: string){
+    // Fazer verificação para excluir local ou no banco!
+    /*
     if(typeof colab === 'number'){
       this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: any) => {
         return colaboradores.id_colaborado !== colab;
@@ -91,6 +93,7 @@ export class EditaEquipeComponent implements OnInit {
         return colaboradores.nome_colaborado !== colab;
       })
     }
+    */
 
     if(typeof colab === 'string'){
       this.colaboradoresNovos = this.colaboradoresNovos.filter((colaboradores: any) => {
@@ -99,18 +102,18 @@ export class EditaEquipeComponent implements OnInit {
     }
   }
 
-  excluirColaboradoNoBanco(id: number){
+  excluirColaboradoNoBanco(id: string){
     this.service.deleteColaborado(id).subscribe();
   }
 
   onSubmit(){
     for(let j in this.colaboradoresNovos){
       this.formColaborado = new FormGroup({
-        'nome_colaborado': new FormControl(this.colaboradoresNovos[j].nome_colaborado),
-        'atribuicao': new FormControl(this.colaboradoresNovos[j].atribuicao),
-        'id_equipe': new FormControl(this.idEquipe)
+        'name': new FormControl(this.colaboradoresNovos[j].name),
+        'office': new FormControl(this.colaboradoresNovos[j].office),
+        'id': new FormControl(this.idEquipe)
       });
-      (<FormArray>this.formEquipe.get('colaboradores')).push(this.formColaborado);
+      (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
     }
     this.service.putEquipe(this.formEquipe.value).subscribe({
       complete: () => {
