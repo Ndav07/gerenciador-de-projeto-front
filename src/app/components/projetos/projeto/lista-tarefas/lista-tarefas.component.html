@@ -1,10 +1,6 @@
 <div class="tarefas">
   <div class="tabela">
 
-
-
-
-    <!--
     <div class="afazeres">
       <div class="flex">
         <h4>Afazeres</h4>
@@ -12,13 +8,13 @@
       </div>
       <ul *ngFor="let tar of tarefas">
           <div *ngIf="tar.status == 'afazeres'" class="top flex">
-              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.nome_colaborado }}</span>
+                <span>{{ tar.contribuidor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
-                <img (click)="editTarefa(tar.id_tarefa, tar.nome_tarefa, tar.descricao, tar.id_colaborado, tar.nome_colaborado)" src="../../../assets/edit.svg">
-                <img (click)="mudarTarefaDeStatus(statusAfazeres, tar.id_tarefa)" src="../../../assets/seta-direita.svg">
-                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id , tar.contribuidor?.name)" src="../../../assets/edit.svg">
+                <img (click)="mudarTarefaDeStatus(statusAfazeres, tar.id!)" src="../../../assets/seta-direita.svg">
+                <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>
           </div>
       </ul>
@@ -31,13 +27,13 @@
       </div>
       <ul *ngFor="let tar of tarefas">
           <div *ngIf="tar.status == 'andamento'" class="top flex">
-              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.nome_colaborado }}</span>
+                <span>{{ tar.contribuidor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
-                <img (click)="editTarefa(tar.id_tarefa, tar.nome_tarefa, tar.descricao, tar.id_colaborado, tar.nome_colaborado)" src="../../../assets/edit.svg">
-                <img (click)="mudarTarefaDeStatus(statusAndamento, tar.id_tarefa)" src="../../../assets/seta-direita.svg">
-                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id , tar.contribuidor?.name)" src="../../../assets/edit.svg">
+                <img (click)="mudarTarefaDeStatus(statusAndamento, tar.id!)" src="../../../assets/seta-direita.svg">
+                <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>
           </div>
       </ul>
@@ -50,16 +46,15 @@
       </div>
       <ul *ngFor="let tar of tarefas">
           <div *ngIf="tar.status == 'concluidas'" class="top flex">
-              <li class="nomeTarefa">{{ tar.nome_tarefa }}</li>
+              <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.nome_colaborado }}</span>
+                <span>{{ tar.contribuidor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
-                <img (click)="deletarTarefa(tar.id_tarefa)" src="../../../assets/excluir.svg">
+                <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>
           </div>
       </ul>
     </div>
-    -->
 
   </div>
 </div>

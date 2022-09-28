@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Task } from 'src/app/interfaces/Task';
+import { Team } from 'src/app/interfaces/Team';
 
 import { ProjetosService } from 'src/app/services/project.service';
 
@@ -36,9 +37,9 @@ export class ListaTarefasComponent implements OnInit {
     this.criarTarefa = !this.criarTarefa;
   }
 
-  editTarefa(id_tarefa: number, nome_tarefa: string, descricao: string, id_colaborado: number, nome_colaborado: string){
+  editTarefa(id: string, nome_tarefa: string, descricao?: string, id_colaborado?: string, nome_colaborado?: string){
     this.editarTarefa = !this.editarTarefa;
-    this.tarefa = {id_equipe: this.id_equipe, id_tarefa: id_tarefa, nome_tarefa: nome_tarefa, descricao: descricao, id_colaborado: id_colaborado, nome_colaborado: nome_colaborado};
+    this.tarefa = {id_equipe: this.id_equipe, id_tarefa: id, nome_tarefa: nome_tarefa, descricao: descricao, id_colaborado: id_colaborado, nome_colaborado: nome_colaborado};
   }
 
   fechaCriacaodeTarefa(){
@@ -59,14 +60,14 @@ export class ListaTarefasComponent implements OnInit {
     this.editarTarefa = !this.editarTarefa;
   }
 
-  mudarTarefaDeStatus(status: string, id_tarefa: number){
+  mudarTarefaDeStatus(status: string, id: string){
     if(status === 'afazeres'){
       this.status = 'andamento';
     }
     if(status === 'andamento'){
       this.status = 'concluidas';
     }
-    this.tarefa = {id: id_tarefa, novoStatus: this.status};
+    this.tarefa = {id: id, novoStatus: this.status};
 
     this.service.putMudarStatusDeTarefa(this.tarefa).subscribe({
       complete: () => {

@@ -1,5 +1,4 @@
 <div [@transicaoProjetos]="state" *ngFor="let projeto of projetos" class="proj">
-
   <div *ngIf="!load" class="projeto">
     <h2>{{ projeto.name }}</h2>
     <div>
@@ -7,16 +6,15 @@
       <img routerLink="/editaProjeto/{{projeto.id}}" class="edit-equipe" src="../../../assets/edit.svg">
     </div>
 
-    <!--Name da Equipe <h3>{{ projeto.name }}</h3> -->
+   <h3>{{ projeto.team }}</h3>
 
-    <app-lista-colaboradores></app-lista-colaboradores>
+    <app-lista-colaboradores *ngIf="projeto.team"></app-lista-colaboradores>
 
-    <!--
     <div class="tarefas">
       <h3>Tarefas</h3>
-      <app-lista-tarefas [tarefas]="tarefasOrganizadasPorProjeto[projeto.id]" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id" [id_equipe]="projeto.idEquipe"></app-lista-tarefas>
+      <app-lista-tarefas [tarefas]="tarefas" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id" [id_equipe]="projeto.team?.id"></app-lista-tarefas>
     </div>
-    -->
+
   </div>
 
 </div>

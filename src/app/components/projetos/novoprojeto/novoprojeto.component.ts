@@ -36,17 +36,17 @@ export class NovoprojetoComponent implements OnInit {
   }
 
   onSubmit(){
-    this.formProjeto.value.id_projeto = this.idProjeto;
+    this.formProjeto.value.idProjeto = this.idProjeto;
 
-    if(this.formProjeto.value.id_equipe !== null){
+    if(this.formProjeto.value.idEquipe !== null){
       this.postAssociarProjetoEquipe();
     } else{
-      this.postProjeto();
+      this.postProjeto(this.formProjeto.value.name);
     }
   }
 
-  postProjeto() {
-    this.service.postCriarProjeto(this.formProjeto.value).subscribe({
+  postProjeto(name: string) {
+    this.service.postCriarProjeto(name).subscribe({
       complete: () => {
         this.router.navigate(['/projetos']);
       }

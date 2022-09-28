@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
 
-import { User } from './user.model';
+import { User } from 'src/app/interfaces/User';
 
 import { Subject } from 'rxjs';
 
@@ -20,21 +20,18 @@ export class AuthComponent implements OnInit {
 
   loader: boolean = false;
 
-  usuario = new Subject<User>();
-
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
       'email' : new FormControl(null, [Validators.email, Validators.required]),
-      'senha' : new FormControl(null, Validators.required)
+      'password' : new FormControl(null, Validators.required)
     })
   }
 
   logar(){
     this.loader = true;
-    const user = new User(this.formLogin.value.email, this.formLogin.value.senha);
-    this.service.postVerificacao(user.email, user.senha).subscribe({
+    this.service.postVerificacao(this.formLogin.value).subscribe({
       error: () => {
         alert('usuário não encontrado');
         location.reload();
@@ -49,8 +46,8 @@ export class AuthComponent implements OnInit {
   cadastrar(){
     this.loader = true;
     this.service.postCadastrar(this.formLogin.value).subscribe({
-      error: () => {
-        alert('usuário já existe');
+      error: (err) => {
+        alert(err);
         location.reload();
       },
       complete: () => {

@@ -11,7 +11,7 @@ import { PaginaNaoEncontradaComponent } from './components/pagina-nao-encontrada
 import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/auth', pathMatch: 'full'},
+  {path: '', redirectTo: '/projetos', pathMatch: 'full'},
   {path: 'auth', component: AuthComponent},
   {path: 'projetos', component: ProjetosComponent},
   {path: 'equipes', component: EquipesComponent},
