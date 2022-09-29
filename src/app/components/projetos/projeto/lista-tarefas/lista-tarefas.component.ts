@@ -37,9 +37,9 @@ export class ListaTarefasComponent implements OnInit {
     this.criarTarefa = !this.criarTarefa;
   }
 
-  editTarefa(id: string, name: string, description?: string, contributor?: string): void {
+  editTarefa(tar: Task): void {
     this.editarTarefa = !this.editarTarefa;
-    this.tarefa = {id: id, name: name, description: description, contributor: contributor};
+    this.tarefa = { id: tar.id!, name: tar.name, description: tar.description, contributor: tar.contribuidor?.id };
   }
 
   fechaCriacaodeTarefa(): void {
@@ -67,7 +67,7 @@ export class ListaTarefasComponent implements OnInit {
     if(status === 'andamento'){
       this.status = 'concluidas';
     }
-    this.tarefa = {id: id, novoStatus: this.status};
+    this.tarefa = {id: id, status: this.status};
 
     this.service.putMudarStatusDeTarefa(this.tarefa).subscribe({
       complete: () => {

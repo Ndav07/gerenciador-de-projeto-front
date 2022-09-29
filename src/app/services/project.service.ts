@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
+import { IEditTaskDTO } from '../shared/interfaces/IFrontEnd/IEditeTarefaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class ProjetosService {
 
   //private baseApiUrl = environment.baseApiUrl;
   private baseApiUrl = "http://localhost:3333";
-
 
 
   //GET
@@ -36,6 +36,14 @@ export class ProjetosService {
   private criarProjeto = `${this.baseApiUrl}/projects`;
 
   //
+
+  //PUT
+  private mudarStatusDeTarefa = `${this.baseApiUrl}mudarStatusDeTarefa/`;
+
+  //
+
+
+
 
   private projeto = `${this.baseApiUrl}projeto/`;
 
@@ -60,7 +68,6 @@ export class ProjetosService {
 
   private editaEquipeProjeto = `${this.baseApiUrl}editaEquipeProjeto/`;
 
-  private mudarStatusDeTarefa = `${this.baseApiUrl}mudarStatusDeTarefa/`;
 
   private editarTarefa = `${this.baseApiUrl}editarTarefa/`;
 
@@ -86,6 +93,13 @@ export class ProjetosService {
   //Post
   postCriarProjeto(formGroup: FormGroup): Observable<void> {
     return this.http.post<void>(this.criarProjeto, formGroup);
+  }
+
+  //
+
+  //Put
+  putMudarStatusDeTarefa(tarefa: IEditTaskDTO){
+    return this.http.put(`${this.mudarStatusDeTarefa}`, tarefa);
   }
 
   //
@@ -133,9 +147,6 @@ export class ProjetosService {
     return this.http.put<FormGroup>(this.editaEquipeProjeto, formGroup);
   }
 
-  putMudarStatusDeTarefa(tarefa: Task){
-    return this.http.put(`${this.mudarStatusDeTarefa}`, tarefa);
-  }
 
   putTarefa(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.put<FormGroup>(this.editarTarefa, formGroup);
