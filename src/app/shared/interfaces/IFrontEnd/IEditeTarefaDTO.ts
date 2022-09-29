@@ -3,5 +3,6 @@ export interface IEditTaskDTO {
     name?: string;
     description?: string;
     contributor?: string;
+    team?: string;
     status?: string;
 }

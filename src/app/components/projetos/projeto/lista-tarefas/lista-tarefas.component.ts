@@ -39,7 +39,7 @@ export class ListaTarefasComponent implements OnInit {
 
   editTarefa(tar: Task): void {
     this.editarTarefa = !this.editarTarefa;
-    this.tarefa = { id: tar.id!, name: tar.name, description: tar.description, contributor: tar.contribuidor?.id };
+    this.tarefa = { id: tar.id!, name: tar.name, description: tar.description, team: this.id_equipe, contributor: tar.contribuidor?.id };
   }
 
   fechaCriacaodeTarefa(): void {

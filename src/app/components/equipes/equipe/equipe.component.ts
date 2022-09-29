@@ -2,9 +2,9 @@ import { Component, OnInit, EventEmitter, Input, Output  } from '@angular/core';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { Contributor } from 'src/app/shared/interfaces/Contributor';
+import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
-import { Team } from 'src/app/shared/interfaces/IbackEnd/Team';
+import { Team } from 'src/app/shared/interfaces/IBackEnd/Team';
 
 import { EquipesService } from 'src/app/services/team.service';
 

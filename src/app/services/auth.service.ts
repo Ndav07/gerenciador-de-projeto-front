@@ -12,7 +12,6 @@ import { Token } from '../shared/interfaces/IBackEnd/Token';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-
   //private baseApiUrl = environment.baseApiUrl;
   private baseApiUrl = "http://localhost:3333/";
 
@@ -27,8 +26,11 @@ export class AuthService {
     return this.http.post<FormGroup>(`${this.cadastrar}`, formGroup);
   }
 
-  postVerificacao(formGroup: FormGroup): Observable<Token> {
-      return this.http.post<Token>(`${this.verificacao}`, formGroup).pipe(
+  postVerificacao(email: string, password: string): Observable<Token> {
+      return this.http.post<Token>(`${this.verificacao}`, {
+        email: email,
+        password: password
+      }).pipe(
         tap(res => {
           const token = res.token;
           const userEmail = res.user.email;

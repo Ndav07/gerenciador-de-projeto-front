@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/shared/interfaces/IBackEnd/Project';
 
-
 @Component({
   selector: 'app-projetos',
   templateUrl: './projetos.component.html',

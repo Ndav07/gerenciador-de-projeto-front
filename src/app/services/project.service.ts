@@ -38,8 +38,9 @@ export class ProjetosService {
   //
 
   //PUT
-  private mudarStatusDeTarefa = `${this.baseApiUrl}mudarStatusDeTarefa/`;
+  private mudarStatusDeTarefa = `${this.baseApiUrl}/`;
 
+  private editarTarefa = `${this.baseApiUrl}/`;
   //
 
 
@@ -69,7 +70,6 @@ export class ProjetosService {
   private editaEquipeProjeto = `${this.baseApiUrl}editaEquipeProjeto/`;
 
 
-  private editarTarefa = `${this.baseApiUrl}editarTarefa/`;
 
   private editaColaboradoEmTarefa = `${this.baseApiUrl}editaColaboradoEmTarefa/`;
 
@@ -98,10 +98,13 @@ export class ProjetosService {
   //
 
   //Put
-  putMudarStatusDeTarefa(tarefa: IEditTaskDTO){
-    return this.http.put(`${this.mudarStatusDeTarefa}`, tarefa);
+  putMudarStatusDeTarefa(tarefa: IEditTaskDTO): Observable<void> {
+    return this.http.patch<void>(`${this.mudarStatusDeTarefa}`, tarefa);
   }
 
+  putTarefa(tarefa: IEditTaskDTO): Observable<void> {
+    return this.http.put<void>(this.editarTarefa, tarefa);
+  }
   //
 
   getProjetoId(id: string): Observable<Project[]> {
@@ -148,9 +151,6 @@ export class ProjetosService {
   }
 
 
-  putTarefa(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.put<FormGroup>(this.editarTarefa, formGroup);
-  }
 
   putEditaColaboradoEmTarefa(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.put<FormGroup>(this.editaColaboradoEmTarefa, formGroup);

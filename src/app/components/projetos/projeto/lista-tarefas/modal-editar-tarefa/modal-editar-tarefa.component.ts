@@ -36,11 +36,9 @@ export class ModalEditarTarefaComponent implements OnInit {
   }
 
   getColaboradoresdaEquipe(){
-    /*
-    if(this.tarefa.id_equipe){
-      this.service.getColaboradoresdaEquipe(this.tarefa.id_equipe).subscribe((colaboradores) => (this.colaboradores = colaboradores));
+    if(this.tarefa.team){
+      this.service.getColaboradoresdaEquipe(this.tarefa.team).subscribe((colaboradores) => (this.colaboradores = colaboradores));
     }
-    */
   }
 
   onSubmit(){

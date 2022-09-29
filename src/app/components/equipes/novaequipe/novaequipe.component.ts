@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
-import { Contributor } from 'src/app/shared/interfaces/Contributor';
+import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 
 @Component({

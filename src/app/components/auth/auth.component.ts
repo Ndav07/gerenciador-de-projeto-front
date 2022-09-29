@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
 
-import { User } from 'src/app/shared/interfaces/IbackEnd/User';
+import { User } from 'src/app/shared/interfaces/IBackEnd/User';
 
 import { Subject } from 'rxjs';
 
@@ -31,7 +31,7 @@ export class AuthComponent implements OnInit {
 
   logar(){
     this.loader = true;
-    this.service.postVerificacao(this.formLogin.value).subscribe({
+    this.service.postVerificacao(this.formLogin.value.email, this.formLogin.value.password).subscribe({
       error: () => {
         alert('usuário não encontrado');
         location.reload();
