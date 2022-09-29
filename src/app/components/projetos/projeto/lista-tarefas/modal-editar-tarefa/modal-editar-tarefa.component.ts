@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Contributor } from 'src/app/interfaces/Contributor';
+import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 import { ProjetosService } from 'src/app/services/project.service';
+import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/IEditeTarefaDTO';
 
-import { Task } from 'src/app/interfaces/Task';
 
 @Component({
   selector: 'app-modal-editar-tarefa',
@@ -14,7 +14,7 @@ import { Task } from 'src/app/interfaces/Task';
   styleUrls: ['./modal-editar-tarefa.component.css']
 })
 export class ModalEditarTarefaComponent implements OnInit {
-  @Input() tarefa!: Task;
+  @Input() tarefa!: IEditTaskDTO;
 
   @Output() carregarTarefas: EventEmitter<Event> = new EventEmitter();
   @Output() fechaModal: EventEmitter<Event> = new EventEmitter();
@@ -28,10 +28,10 @@ export class ModalEditarTarefaComponent implements OnInit {
   ngOnInit(): void {
     this.getColaboradoresdaEquipe();
     this.formTarefa = new FormGroup({
-      'id_tarefa': new FormControl(this.tarefa.id),
-      'id_colaborado': new FormControl(this.tarefa.contribuidor),
-      'nome_tarefa': new FormControl(this.tarefa.name, Validators.required),
-      'descricao': new FormControl(this.tarefa.description, Validators.maxLength(300))
+      'id': new FormControl(this.tarefa.id),
+      'name': new FormControl(this.tarefa.name, Validators.required),
+      'description': new FormControl(this.tarefa.description, Validators.maxLength(300)),
+      'contributor': new FormControl(this.tarefa.contributor)
     });
   }
 
@@ -50,10 +50,10 @@ export class ModalEditarTarefaComponent implements OnInit {
   editarTarefa(){
     this.service.putTarefa(this.formTarefa.value).subscribe({
       complete: () => {
-        if(this.tarefa.contribuidor === null && this.formTarefa.value.id_colaborado !== this.tarefa.contribuidor){
+        if(this.tarefa.contributor === null && this.formTarefa.value.id_colaborado !== this.tarefa.contributor){
           this.criaColaboradorEmTarefa();
         }
-        else if(this.formTarefa.value.id_colaborado !== this.tarefa.contribuidor){
+        else if(this.formTarefa.value.id_colaborado !== this.tarefa.contributor){
           this.associaColaboradorEmTarefa();
         } else {
           this.carregarTarefas.emit();

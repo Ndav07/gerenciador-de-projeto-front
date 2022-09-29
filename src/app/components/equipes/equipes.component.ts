@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from 'src/app/interfaces/Team';
+import { Team } from 'src/app/shared/interfaces/IbackEnd/Team';
 
 @Component({
   selector: 'app-equipes',

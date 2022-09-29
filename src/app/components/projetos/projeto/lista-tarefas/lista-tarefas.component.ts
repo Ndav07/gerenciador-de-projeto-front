@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Task } from 'src/app/interfaces/Task';
-import { Team } from 'src/app/interfaces/Team';
+import { Task } from 'src/app/shared/interfaces/IBackEnd/Task';
 
 import { ProjetosService } from 'src/app/services/project.service';
+import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/IEditeTarefaDTO';
 
 @Component({
   selector: 'app-lista-tarefas',
@@ -11,7 +11,7 @@ import { ProjetosService } from 'src/app/services/project.service';
   styleUrls: ['./lista-tarefas.component.css']
 })
 export class ListaTarefasComponent implements OnInit {
-  @Input() tarefas: Task[] = [];
+  @Input() tarefas?: Task[] = [];
   @Input() id_projeto!: string;
   @Input() id_equipe?: string;
 
@@ -26,41 +26,41 @@ export class ListaTarefasComponent implements OnInit {
   statusConcluidas: string = 'concluidas';
   status!: string;
 
-  tarefa: any;
+  tarefa!: IEditTaskDTO;
 
   constructor(private service: ProjetosService) { }
 
   ngOnInit(): void {}
 
-  addTarefa(status: string){
+  addTarefa(status: string): void {
     this.status = status;
     this.criarTarefa = !this.criarTarefa;
   }
 
-  editTarefa(id: string, nome_tarefa: string, descricao?: string, id_colaborado?: string, nome_colaborado?: string){
+  editTarefa(id: string, name: string, description?: string, contributor?: string): void {
     this.editarTarefa = !this.editarTarefa;
-    this.tarefa = {id_equipe: this.id_equipe, id_tarefa: id, nome_tarefa: nome_tarefa, descricao: descricao, id_colaborado: id_colaborado, nome_colaborado: nome_colaborado};
+    this.tarefa = {id: id, name: name, description: description, contributor: contributor};
   }
 
-  fechaCriacaodeTarefa(){
+  fechaCriacaodeTarefa(): void {
     this.criarTarefa = !this.criarTarefa;
   }
 
-  fechaEdicaodeTarefa(){
+  fechaEdicaodeTarefa(): void {
     this.editarTarefa = !this.editarTarefa;
   }
 
-  pegarTarefas(){
+  pegarTarefas(): void {
     this.getTarefasProjeto.emit();
     this.criarTarefa = !this.criarTarefa;
   }
 
-  pegarTarefasEdicao(){
+  pegarTarefasEdicao(): void {
     this.getTarefasProjeto.emit();
     this.editarTarefa = !this.editarTarefa;
   }
 
-  mudarTarefaDeStatus(status: string, id: string){
+  mudarTarefaDeStatus(status: string, id: string): void {
     if(status === 'afazeres'){
       this.status = 'andamento';
     }

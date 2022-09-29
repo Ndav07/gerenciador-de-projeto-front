@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
 
 import { FormGroup } from '@angular/forms';
 
-import { Team } from '../interfaces/Team';
+import { Team } from '../shared/interfaces/IBackEnd/Team';
 
-import { Contributor } from '../interfaces/Contributor';
+import { Contributor } from '../shared/interfaces/IBackEnd/Contributor';
 
 @Injectable({
   providedIn: 'root'

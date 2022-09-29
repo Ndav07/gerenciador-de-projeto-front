@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Contributor} from 'src/app/interfaces/Contributor';
+import { Contributor} from 'src/app/shared/interfaces/Contributor';
 
 import { ProjetosService } from 'src/app/services/project.service';
 

@@ -6,13 +6,13 @@
       <img routerLink="/editaProjeto/{{projeto.id}}" class="edit-equipe" src="../../../assets/edit.svg">
     </div>
 
-   <h3>{{ projeto.team }}</h3>
+   <h3>{{ projeto.team?.name }}</h3>
 
     <app-lista-colaboradores *ngIf="projeto.team"></app-lista-colaboradores>
 
     <div class="tarefas">
       <h3>Tarefas</h3>
-      <app-lista-tarefas [tarefas]="tarefas" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id" [id_equipe]="projeto.team?.id"></app-lista-tarefas>
+      <app-lista-tarefas [tarefas]="projeto.tasks" (getTarefasProjeto)="getProjetos()" [id_projeto]="projeto.id" [id_equipe]="projeto.team?.id"></app-lista-tarefas>
     </div>
 
   </div>

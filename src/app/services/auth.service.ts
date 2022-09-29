@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 import { FormGroup } from '@angular/forms';
 
-import { Token } from '../interfaces/Token';
+import { Token } from '../shared/interfaces/IBackEnd/Token';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

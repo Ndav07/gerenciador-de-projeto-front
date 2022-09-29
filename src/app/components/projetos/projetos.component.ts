@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/interfaces/Project';
+import { Project } from 'src/app/shared/interfaces/IBackEnd/Project';
 
 
 @Component({

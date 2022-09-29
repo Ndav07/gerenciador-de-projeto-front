@@ -2,9 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Project } from 'src/app/interfaces/Project';
-
-import { Task } from 'src/app/interfaces/Task';
+import { Project } from 'src/app/shared/interfaces/IBackEnd/Project';
 
 import { ProjetosService } from '../../../services/project.service';
 
@@ -32,8 +30,6 @@ export class ProjetoComponent implements OnInit {
 
   projetos: Project[] = [];
 
-  tarefas: any[] = [];
-
   load: boolean = true;
 
   error: string = '';
@@ -57,10 +53,6 @@ export class ProjetoComponent implements OnInit {
   getProjetos(){
     this.projetosService.getProjetos().subscribe({
       next: (projetos) => {
-        console.log(projetos);
-        for(let j in projetos) {
-          this.tarefas.push(projetos[j].tasks)
-        }
         this.projetos = projetos;
         console.log(this.projetos)
       },

@@ -25,7 +25,7 @@ import { ModalCriarTarefaComponent } from './components/projetos/projeto/lista-t
 import { ModalEditarTarefaComponent } from './components/projetos/projeto/lista-tarefas/modal-editar-tarefa/modal-editar-tarefa.component';
 import { PaginaNaoEncontradaComponent } from './components/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
+import { LoadingSpinnerComponent } from './shared/spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [

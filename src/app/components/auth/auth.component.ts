@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
 
-import { User } from 'src/app/interfaces/User';
+import { User } from 'src/app/shared/interfaces/IbackEnd/User';
 
 import { Subject } from 'rxjs';
 

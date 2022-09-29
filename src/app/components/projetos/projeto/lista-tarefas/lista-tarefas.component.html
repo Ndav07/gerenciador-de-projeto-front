@@ -12,7 +12,7 @@
               <div class="flex">
                 <span>{{ tar.contribuidor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
-                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id , tar.contribuidor?.name)" src="../../../assets/edit.svg">
+                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id)" src="../../../assets/edit.svg">
                 <img (click)="mudarTarefaDeStatus(statusAfazeres, tar.id!)" src="../../../assets/seta-direita.svg">
                 <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>
@@ -31,7 +31,7 @@
               <div class="flex">
                 <span>{{ tar.contribuidor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
-                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id , tar.contribuidor?.name)" src="../../../assets/edit.svg">
+                <img (click)="editTarefa(tar.id!, tar.name, tar.description, tar.contribuidor?.id)" src="../../../assets/edit.svg">
                 <img (click)="mudarTarefaDeStatus(statusAndamento, tar.id!)" src="../../../assets/seta-direita.svg">
                 <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>

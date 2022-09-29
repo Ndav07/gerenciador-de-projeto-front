@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { Project } from '../interfaces/Project';
+import { Project } from '../shared/interfaces/IBackEnd/Project';
 
-import { Team } from '../interfaces/Team';
+import { Team } from '../shared/interfaces/IBackEnd/Team';
 
-import { Task } from '../interfaces/Task';
+import { Task } from '../shared/interfaces/IBackEnd/Task';
 
-import { Contributor } from '../interfaces/Contributor';
+import { Contributor } from '../shared/interfaces/IBackEnd/Contributor';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, tap, delay } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { FormGroup } from '@angular/forms';
 
@@ -60,8 +60,6 @@ export class ProjetosService {
 
   private editaEquipeProjeto = `${this.baseApiUrl}editaEquipeProjeto/`;
 
-  private equipeEmProjeto = `${this.baseApiUrl}equipeEmProjeto/`;
-
   private mudarStatusDeTarefa = `${this.baseApiUrl}mudarStatusDeTarefa/`;
 
   private editarTarefa = `${this.baseApiUrl}editarTarefa/`;
@@ -86,9 +84,10 @@ export class ProjetosService {
   //
 
   //Post
-  postCriarProjeto(name: string ): Observable<void> {
-    return this.http.post<void>(this.criarProjeto, { name: name });
+  postCriarProjeto(formGroup: FormGroup): Observable<void> {
+    return this.http.post<void>(this.criarProjeto, formGroup);
   }
+
   //
 
   getProjetoId(id: string): Observable<Project[]> {
@@ -113,9 +112,6 @@ export class ProjetosService {
   }
 
 
-  postEquipeProjeto(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.put<FormGroup>(this.equipeEmProjeto, formGroup);
-  }
 
   postCriarTarefa(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.post<FormGroup>(this.criarTarefa , formGroup);

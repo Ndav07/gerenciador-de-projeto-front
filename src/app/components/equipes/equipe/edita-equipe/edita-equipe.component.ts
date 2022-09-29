@@ -6,8 +6,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Team } from 'src/app/interfaces/Team';
-import { Contributor } from 'src/app/interfaces/Contributor';
+import { Team } from 'src/app/shared/interfaces/IbackEnd/Team';
+import { Contributor } from 'src/app/shared/interfaces/Contributor';
 
 @Component({
   selector: 'app-edita-equipe',

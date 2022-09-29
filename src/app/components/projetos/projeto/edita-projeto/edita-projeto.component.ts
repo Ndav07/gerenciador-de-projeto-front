@@ -4,9 +4,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Team } from 'src/app/interfaces/Team';
+import { Team } from 'src/app/shared/interfaces/IBackEnd/Team';
 
-import { Project } from 'src/app/interfaces/Project';
+import { Project } from 'src/app/shared/interfaces/IBackEnd/Project';
 
 import { ProjetosService } from 'src/app/services/project.service';
 
