@@ -19,11 +19,11 @@
           <p class="erroValid">Máximo de 300 caracteres.</p>
         </div>
 
-        <div *ngIf="colaboradores.length > 1" class="addColaborado">
+        <div *ngIf="colaboradores.length > 0" class="addColaborado">
           <h3>Colaborado</h3>
         </div>
 
-        <select *ngIf="colaboradores.length > 1" class="colaboradores" formControlName="contributor">
+        <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="contributor">
           <option value="tarefa.contributor" selected disabled>{{ tarefa.name }}</option>
           <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id">{{ colaborado.name }}</option>
         </select>

@@ -24,18 +24,15 @@ export class ModalCriarTarefaComponent implements OnInit {
 
   colaboradores: Contributor[] = [];
 
-  idTarefa?: string;
-
   constructor(private service: ProjetosService) { }
 
   ngOnInit(): void {
     this.getColaboradoresdaEquipe();
     this.formTarefa = new FormGroup({
-      'id_tarefa': new FormControl(null),
-      'id_projeto': new FormControl(this.id_projeto),
-      'id_colaborado': new FormControl(null),
-      'nome_tarefa': new FormControl(null, Validators.required),
-      'descricao': new FormControl(null, Validators.maxLength(300)),
+      'project': new FormControl(this.id_projeto),
+      'contributor': new FormControl(null),
+      'name': new FormControl(null, Validators.required),
+      'description': new FormControl(null, Validators.maxLength(300)),
       'status': new FormControl(this.status)
     });
   }
@@ -47,24 +44,11 @@ export class ModalCriarTarefaComponent implements OnInit {
   }
 
   onSubmit(){
-    this.formTarefa.value.id_tarefa = this.idTarefa;
     this.criaTarefa();
   }
 
   criaTarefa(){
-    this.service.postCriarTarefa(this.formTarefa.value).subscribe({
-      complete: () => {
-        if(this.formTarefa.value.id_colaborado !== null){
-          this.associaColaboradorEmTarefa();
-        } else {
-          this.carregarTarefas.emit();
-        }
-      }
-    });
-  }
-
-  associaColaboradorEmTarefa(){
-    this.service.postAssociaColaboradoEmTarefa(this.formTarefa.value).subscribe({
+    this.service.postCriarTarefa({ name: this.formTarefa.value.name, status: this.formTarefa.value.status, description: this.formTarefa.value.description, contributor: this.formTarefa.value.contributor }).subscribe({
       complete: () => {
         this.carregarTarefas.emit();
       }

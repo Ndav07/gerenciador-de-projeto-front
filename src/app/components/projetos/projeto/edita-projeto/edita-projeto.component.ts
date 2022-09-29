@@ -18,7 +18,7 @@ import { ProjetosService } from 'src/app/services/project.service';
 export class EditaProjetoComponent implements OnInit {
   equipes: Team[] = [];
 
-  projeto!: Project[];
+  projeto!: Project;
 
   formProjeto!: FormGroup;
 
@@ -26,27 +26,25 @@ export class EditaProjetoComponent implements OnInit {
 
   constructor(private service: ProjetosService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void{
-    this.getProjetosId();
-  }
+  ngOnInit() {}
 
-  getProjetosId(){
+  getProjetosId() {
     const id = String(this.route.snapshot.paramMap.get('id'));
+
     this.service.getProjetoId(id).subscribe({
       next: (projeto) => {
         this.projeto = projeto;
       },
       complete: () => {
         this.formProjeto = new FormGroup({
-          'id_projeto': new FormControl(this.projeto[0].id),
-          'nome_projeto': new FormControl(this.projeto[0].name, Validators.required),
-          'id_equipe': new FormControl(this.projeto[0])
-          //Fazera modelarem para pegar o id da equipe
+          'id': new FormControl(this.projeto.id),
+          'name': new FormControl(this.projeto.name, Validators.required),
+          'team': new FormControl(this.projeto.team?.id)
         });
         this.formProjetoAntigo = new FormGroup({
-          'id_projeto': new FormControl(this.projeto[0].id),
-          'nome_projeto': new FormControl(this.projeto[0].name),
-          'id_equipeAntiga': new FormControl(this.projeto[0])
+          'id': new FormControl(this.projeto.id),
+          'name': new FormControl(this.projeto.name),
+          'team': new FormControl(this.projeto.team?.id)
         });
         this.getEquipesSemProjetos();
       }
@@ -58,15 +56,13 @@ export class EditaProjetoComponent implements OnInit {
   }
 
   onSubmit(){
-    /*
-    if(this.projeto[0]=== null && this.formProjeto.value.id_equipe !== this.projeto[0].id_equipe){
+    if(this.projeto === null && this.formProjeto.value.team !== this.projeto.team?.id){
       this.putAssociarProjetoEquipe();
-    } else if(this.formProjeto.value.id_equipe !== null && this.formProjeto.value.id_equipe !== this.projeto[0].id_equipe){
+    } else if(this.formProjeto.value.team !== null && this.formProjeto.value.team !== this.projeto.team?.id){
       this.putLimparCampoProjetoDaEquipeAntiga();
     } else{
       this.putProjeto();
     }
-    */
   }
 
   putProjeto() {

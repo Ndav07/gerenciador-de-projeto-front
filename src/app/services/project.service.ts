@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
-import { IEditTaskDTO } from '../shared/interfaces/IFrontEnd/IEditeTarefaDTO';
+import { ITarefaDTO } from '../shared/interfaces/IFrontEnd/ITarefaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -35,21 +35,25 @@ export class ProjetosService {
   //POST
   private criarProjeto = `${this.baseApiUrl}/projects`;
 
+  private criarTarefa = `${this.baseApiUrl}/tasks`;
   //
 
   //PUT
-  private mudarStatusDeTarefa = `${this.baseApiUrl}/`;
+  private mudarStatusDeTarefa = `${this.baseApiUrl}/tasks`;
 
-  private editarTarefa = `${this.baseApiUrl}/`;
+  private editarTarefa = `${this.baseApiUrl}/tasks`;
   //
 
 
 
 
-  private projeto = `${this.baseApiUrl}projeto/`;
+  
+
+
 
   private tarefas = `${this.baseApiUrl}tarefas/`;
 
+  private projeto = `${this.baseApiUrl}projeto/`;
 
   private colaboradoresdaEquipe = `${this.baseApiUrl}colaboradoresdaEquipe/`;
 
@@ -57,21 +61,12 @@ export class ProjetosService {
 
   private maxIdTarefa = `${this.baseApiUrl}maxIdTarefa/`;
 
-
-  private criarTarefa = `${this.baseApiUrl}criarTarefa/`;
-
-  private associaColaboradoEmTarefa = `${this.baseApiUrl}associaColaboradoEmTarefa/`;
-
   //PUT
   private editaProjeto = `${this.baseApiUrl}editaProjeto/`;
 
   private editaEquipeAntiga = `${this.baseApiUrl}editaEquipeAntiga/`;
 
   private editaEquipeProjeto = `${this.baseApiUrl}editaEquipeProjeto/`;
-
-
-
-  private editaColaboradoEmTarefa = `${this.baseApiUrl}editaColaboradoEmTarefa/`;
 
   //DELETE
   private deletaProjeto = `${this.baseApiUrl}deletaProjeto/`;
@@ -95,14 +90,17 @@ export class ProjetosService {
     return this.http.post<void>(this.criarProjeto, formGroup);
   }
 
+  postCriarTarefa(tarefa: ITarefaDTO): Observable<void> {
+    return this.http.post<void>(this.criarTarefa , tarefa);
+  }
   //
 
   //Put
-  putMudarStatusDeTarefa(tarefa: IEditTaskDTO): Observable<void> {
+  putMudarStatusDeTarefa(tarefa: ITarefaDTO): Observable<void> {
     return this.http.patch<void>(`${this.mudarStatusDeTarefa}`, tarefa);
   }
 
-  putTarefa(tarefa: IEditTaskDTO): Observable<void> {
+  putTarefa(tarefa: ITarefaDTO): Observable<void> {
     return this.http.put<void>(this.editarTarefa, tarefa);
   }
   //
@@ -130,13 +128,6 @@ export class ProjetosService {
 
 
 
-  postCriarTarefa(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.post<FormGroup>(this.criarTarefa , formGroup);
-  }
-
-  postAssociaColaboradoEmTarefa(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.post<FormGroup>(this.associaColaboradoEmTarefa, formGroup);
-  }
 
   putProjeto(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.put<FormGroup>(this.editaProjeto, formGroup);
@@ -148,12 +139,6 @@ export class ProjetosService {
 
   putEquipeProjeto(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.put<FormGroup>(this.editaEquipeProjeto, formGroup);
-  }
-
-
-
-  putEditaColaboradoEmTarefa(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.put<FormGroup>(this.editaColaboradoEmTarefa, formGroup);
   }
 
   deleteProjeto(id: string){

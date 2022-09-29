@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/shared/interfaces/IBackEnd/Task';
 
 import { ProjetosService } from 'src/app/services/project.service';
-import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/IEditeTarefaDTO';
+import { ITarefaDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
 
 @Component({
   selector: 'app-lista-tarefas',
@@ -26,7 +26,7 @@ export class ListaTarefasComponent implements OnInit {
   statusConcluidas: string = 'concluidas';
   status!: string;
 
-  tarefa!: IEditTaskDTO;
+  tarefa!: ITarefaDTO;
 
   constructor(private service: ProjetosService) { }
 

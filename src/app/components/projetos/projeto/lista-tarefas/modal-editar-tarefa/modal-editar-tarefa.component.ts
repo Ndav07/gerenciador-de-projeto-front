@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 import { ProjetosService } from 'src/app/services/project.service';
-import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/IEditeTarefaDTO';
+import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
 
 
 @Component({
@@ -35,48 +35,25 @@ export class ModalEditarTarefaComponent implements OnInit {
     });
   }
 
-  getColaboradoresdaEquipe(){
+  getColaboradoresdaEquipe() {
     if(this.tarefa.team){
       this.service.getColaboradoresdaEquipe(this.tarefa.team).subscribe((colaboradores) => (this.colaboradores = colaboradores));
     }
   }
 
-  onSubmit(){
+  onSubmit() {
     this.editarTarefa();
   }
 
-  editarTarefa(){
-    this.service.putTarefa(this.formTarefa.value).subscribe({
-      complete: () => {
-        if(this.tarefa.contributor === null && this.formTarefa.value.id_colaborado !== this.tarefa.contributor){
-          this.criaColaboradorEmTarefa();
-        }
-        else if(this.formTarefa.value.id_colaborado !== this.tarefa.contributor){
-          this.associaColaboradorEmTarefa();
-        } else {
-          this.carregarTarefas.emit();
-        }
-      }
-    });
-  }
-
-  criaColaboradorEmTarefa(){
-    this.service.postAssociaColaboradoEmTarefa(this.formTarefa.value).subscribe({
+  editarTarefa() {
+    this.service.putTarefa({ id: this.formTarefa.value.id , name: this.formTarefa.value.name, description: this.formTarefa.value.description, contributor: this.formTarefa.value.contributor }).subscribe({
       complete: () => {
         this.carregarTarefas.emit();
       }
     });
   }
 
-  associaColaboradorEmTarefa(){
-    this.service.putEditaColaboradoEmTarefa(this.formTarefa.value).subscribe({
-      complete: () => {
-        this.carregarTarefas.emit();
-      }
-    });
-  }
-
-  fechar(){
+  fechar() {
     this.fechaModal.emit();
   }
 }

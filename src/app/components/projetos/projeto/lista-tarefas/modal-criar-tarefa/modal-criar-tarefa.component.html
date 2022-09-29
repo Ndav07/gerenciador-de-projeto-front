@@ -4,18 +4,18 @@
     <h2>Nova Tarefa</h2>
     <form [formGroup]="formTarefa" (ngSubmit)="onSubmit()">
         <div class="nomeTarefa">
-            <input type="text" formControlName="nome_tarefa" placeholder="Digite o nome da tarefa">
+            <input type="text" formControlName="name" placeholder="Digite o nome da tarefa">
         </div>
 
-        <div *ngIf="!formTarefa.get('nome_tarefa')?.valid && formTarefa.get('nome_tarefa')?.touched">
+        <div *ngIf="!formTarefa.get('name')?.valid && formTarefa.get('name')?.touched">
           <p class="erroValid">O nome da tarefa é obrigatório.</p>
         </div>
 
         <div class="descricao">
-          <textarea type="" formControlName="descricao" placeholder="Digite a descrição da tarefa"></textarea>
+          <textarea type="" formControlName="description" placeholder="Digite a descrição da tarefa"></textarea>
         </div>
 
-        <div *ngIf="!formTarefa.get('descricao')?.valid && formTarefa.get('descricao')?.touched">
+        <div *ngIf="!formTarefa.get('description')?.valid && formTarefa.get('description')?.touched">
           <p class="erroValid">Máximo de 300 caracteres.</p>
         </div>
 
@@ -23,14 +23,14 @@
           <h3>Colaborado</h3>
         </div>
 
-        <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="id_colaborado">
+        <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="contributor">
           <option value="" disabled selected hidden></option>
           <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id">{{colaborado.name}}</option>
         </select>
 
         <div class="finalizar">
-            <button *ngIf="!formTarefa.get('nome_tarefa')?.valid" disabled>Finalizar</button>
-            <button *ngIf="formTarefa.get('nome_tarefa')?.valid" type="submit">Finalizar</button>
+            <button *ngIf="!formTarefa.get('name')?.valid" disabled>Finalizar</button>
+            <button *ngIf="formTarefa.get('name')?.valid" type="submit">Finalizar</button>
         </div>
     </form>
   </div>

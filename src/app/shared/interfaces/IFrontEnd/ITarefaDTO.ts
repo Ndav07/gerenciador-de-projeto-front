@@ -1,5 +1,5 @@
-export interface IEditTaskDTO {
-    id: string;
+export interface ITarefaDTO {
+    id?: string;
     name?: string;
     description?: string;
     contributor?: string;
