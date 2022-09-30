@@ -15,11 +15,11 @@ export class EquipesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  equipes(equipes: Team[]){
+  equipes(equipes: Team[]) {
     this.equipesAll = equipes;
   }
 
-  search(e: Event){
+  search(e: Event) {
     const target = e.target as HTMLInputElement;
     const value = target.value.toLocaleLowerCase();
     this.equipesFiltradas = this.equipesAll.filter(equip => {

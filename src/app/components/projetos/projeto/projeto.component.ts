@@ -54,7 +54,6 @@ export class ProjetoComponent implements OnInit {
     this.projetosService.getProjetos().subscribe({
       next: (projetos) => {
         this.projetos = projetos;
-        console.log(this.projetos)
       },
       error: (e) => {
         this.error = e.message;

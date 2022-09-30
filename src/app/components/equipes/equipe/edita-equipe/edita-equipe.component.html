@@ -5,10 +5,10 @@
       <form [formGroup]="formEquipe" (ngSubmit)="onSubmit()">
           <h2>Editar Equipe</h2>
           <div class="nomeEquipe">
-              <input type="text" formControlName="nome_equipe" placeholder="Digite o nome da equipe">
+              <input type="text" formControlName="name" placeholder="Digite o nome da equipe">
           </div>
 
-          <div *ngIf="!formEquipe.get('nome_equipe')?.valid && formEquipe.get('nome_equipe')?.touched">
+          <div *ngIf="!formEquipe.get('name')?.valid && formEquipe.get('name')?.touched">
             <p class="erroValid">O nome da equipe é obrigatório.</p>
           </div>
 
@@ -22,7 +22,7 @@
                 <p>{{ colab.name }}<p>
                 <p>{{ colab.office }}</p>
                 <div class="options">
-                  <img src="../../../assets/excluir.svg" (click)="excluirColaboradoDaEquipe(colab.id || colab.name)">
+                  <img src="../../../assets/excluir.svg" (click)="excluirColaboradoDaEquipe(colab.name)">
                 </div>
               </div>
             </div>
@@ -34,21 +34,21 @@
                 <input type="file">
               </div>
               <div class="nome">
-                <input type="text" placeholder="Nome" formControlName="nome_colaborado" id="nome_colaborado">
+                <input type="text" placeholder="Nome" formControlName="name">
               </div>
               <div class="atribuicao">
-                <input type="text" placeholder="Atribuição" formControlName="atribuicao">
+                <input type="text" placeholder="Atribuição" formControlName="office">
               </div>
               <div class="add">
-                <button *ngIf="!formColaborado.get('nome_colaborado')?.valid" disabled>Adicionar colaborador</button>
-                <button type="submit" *ngIf="formColaborado.get('nome_colaborado')?.valid">Adicionar colaborador</button>
+                <button *ngIf="!formColaborado.get('name')?.valid" disabled>Adicionar colaborador</button>
+                <button type="submit" *ngIf="formColaborado.get('name')?.valid">Adicionar colaborador</button>
               </div>
             </div>
           </form>
 
           <div class="finalizar">
-            <button *ngIf="!formEquipe.get('nome_equipe')?.valid" disabled>Finalizar</button>
-            <button *ngIf="formEquipe.get('nome_equipe')?.valid" type="submit">Finalizar</button>
+            <button *ngIf="!formEquipe.get('name')?.valid" disabled>Finalizar</button>
+            <button *ngIf="formEquipe.get('name')?.valid" type="submit">Finalizar</button>
           </div>
       </form>
 

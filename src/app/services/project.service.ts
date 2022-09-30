@@ -16,6 +16,7 @@ import { FormGroup } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
 import { ITarefaDTO } from '../shared/interfaces/IFrontEnd/ITarefaDTO';
+import { IProjetoDTO } from '../shared/interfaces/IFrontEnd/IProjetoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -30,48 +31,28 @@ export class ProjetosService {
   private equipesSemProjetos = `${this.baseApiUrl}/teams/without/project`;
 
   private projetos = `${this.baseApiUrl}/projects`;
-  //
+
+  private projeto = `${this.baseApiUrl}/projects/`;
+
+  private colaboradoresdaEquipe = `${this.baseApiUrl}colaboradoresdaEquipe/`;
 
   //POST
   private criarProjeto = `${this.baseApiUrl}/projects`;
 
   private criarTarefa = `${this.baseApiUrl}/tasks`;
-  //
 
   //PUT
+  private editaProjeto = `${this.baseApiUrl}/projects`;
+
   private mudarStatusDeTarefa = `${this.baseApiUrl}/tasks`;
 
   private editarTarefa = `${this.baseApiUrl}/tasks`;
-  //
-
-
-
-
-  
-
-
-
-  private tarefas = `${this.baseApiUrl}tarefas/`;
-
-  private projeto = `${this.baseApiUrl}projeto/`;
-
-  private colaboradoresdaEquipe = `${this.baseApiUrl}colaboradoresdaEquipe/`;
-
-  private maxIdProjeto = `${this.baseApiUrl}maxIdProjeto/`;
-
-  private maxIdTarefa = `${this.baseApiUrl}maxIdTarefa/`;
-
-  //PUT
-  private editaProjeto = `${this.baseApiUrl}editaProjeto/`;
-
-  private editaEquipeAntiga = `${this.baseApiUrl}editaEquipeAntiga/`;
-
-  private editaEquipeProjeto = `${this.baseApiUrl}editaEquipeProjeto/`;
 
   //DELETE
-  private deletaProjeto = `${this.baseApiUrl}deletaProjeto/`;
+  private deletaProjeto = `${this.baseApiUrl}/projects/`;
 
-  private deletaTarefa = `${this.baseApiUrl}deletaTarefa/`;
+  private deletaTarefa = `${this.baseApiUrl}/tasks/`;
+
 
   constructor(private http: HttpClient) { }
 
@@ -83,17 +64,23 @@ export class ProjetosService {
   getProjetos(): Observable<Project[]> {
     return this.http.get<Project[]>(this.projetos);
   }
-  //
+
+  getProjetoId(id: string): Observable<Project> {
+    return this.http.get<Project>(`${this.projeto}${id}`);
+  }
+
+  getColaboradoresdaEquipe(id: string): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.colaboradoresdaEquipe}${id}`);
+  }
 
   //Post
-  postCriarProjeto(formGroup: FormGroup): Observable<void> {
-    return this.http.post<void>(this.criarProjeto, formGroup);
+  postCriarProjeto(projeto: IProjetoDTO): Observable<void> {
+    return this.http.post<void>(this.criarProjeto, projeto);
   }
 
   postCriarTarefa(tarefa: ITarefaDTO): Observable<void> {
     return this.http.post<void>(this.criarTarefa , tarefa);
   }
-  //
 
   //Put
   putMudarStatusDeTarefa(tarefa: ITarefaDTO): Observable<void> {
@@ -103,49 +90,18 @@ export class ProjetosService {
   putTarefa(tarefa: ITarefaDTO): Observable<void> {
     return this.http.put<void>(this.editarTarefa, tarefa);
   }
-  //
 
-  getProjetoId(id: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.projeto}${id}`);
+  putProjeto(projeto: IProjetoDTO): Observable<void> {
+    return this.http.put<void>(this.editaProjeto, projeto);
   }
 
-  getMaxIdProjeto(){
-    return this.http.get(this.maxIdProjeto);
-  }
-
-  getTarefas(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.tarefas}`);
-  }
-
-  getMaxIdTarefa(){
-    return this.http.get(this.maxIdTarefa);
+  //Delete
+  deleteProjeto(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.deletaProjeto}${id}`);
   }
 
 
-  getColaboradoresdaEquipe(id: string): Observable<Contributor[]> {
-    return this.http.get<Contributor[]>(`${this.colaboradoresdaEquipe}${id}`);
-  }
-
-
-
-
-  putProjeto(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.put<FormGroup>(this.editaProjeto, formGroup);
-  }
-
-  putEquipeAntiga(formGroup: FormGroup) {
-    return this.http.patch(this.editaEquipeAntiga, formGroup);
-  }
-
-  putEquipeProjeto(formGroup: FormGroup): Observable<FormGroup> {
-    return this.http.put<FormGroup>(this.editaEquipeProjeto, formGroup);
-  }
-
-  deleteProjeto(id: string){
-    return this.http.delete(`${this.deletaProjeto}${id}`);
-  }
-
-  deleteTarefa(id: string){
-    return this.http.delete(`${this.deletaTarefa}${id}`);
+  deleteTarefa(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.deletaTarefa}${id}`);
   }
 }

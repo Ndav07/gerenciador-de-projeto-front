@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 import { ProjetosService } from 'src/app/services/project.service';
-import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
+import { ITarefaDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { IEditTaskDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
   styleUrls: ['./modal-editar-tarefa.component.css']
 })
 export class ModalEditarTarefaComponent implements OnInit {
-  @Input() tarefa!: IEditTaskDTO;
+  @Input() tarefa!: ITarefaDTO;
 
   @Output() carregarTarefas: EventEmitter<Event> = new EventEmitter();
   @Output() fechaModal: EventEmitter<Event> = new EventEmitter();

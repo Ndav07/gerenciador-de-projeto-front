@@ -15,11 +15,11 @@ export class ProjetosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  projetos(proj: Project[]){
+  projetos(proj: Project[]) {
     this.projetosAll = proj;
   }
 
-  search(e: Event){
+  search(e: Event) {
     const target = e.target as HTMLInputElement;
     const value = target.value.toLocaleLowerCase();
     this.projetosFiltrados = this.projetosAll.filter(projet => {

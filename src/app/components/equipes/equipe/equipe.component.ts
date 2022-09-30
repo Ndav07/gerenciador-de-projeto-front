@@ -29,11 +29,12 @@ export class EquipeComponent implements OnInit {
   @Input() equipesFiltradas!: Team[];
 
   equipes: Team[] = [];
-  colaboradores: Contributor[] = [];
 
   state = 'inicio';
 
   load: boolean = true;
+
+  error: string = '';
 
   modalExcluir: boolean = false;
 
@@ -43,40 +44,25 @@ export class EquipeComponent implements OnInit {
 
   constructor(private equipesService: EquipesService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
    this.getEquipes();
   }
 
-
-  getEquipes(): void{
+  getEquipes() {
     this.equipesService.getAll().subscribe({
-      next: (equipes) => (this.equipes = equipes),
-      complete: () => {
-        this.enviaAllEquipes.emit(this.equipes);
-        //this.getColaboradores();
-      }
-    })
-  }
-
-  /*
-  getColaboradores(): void{
-    this.equipesService.getcolaboradoresdaEquipe().subscribe({
-      next: (colaboradores) => {
-        this.colaboradores = colaboradores.reduce((colab: any, colabAtual: any) => {
-          if(!colab[colabAtual.id]){
-            colab[colabAtual.id] = [];
-          }
-          colab[colabAtual.id].push(colabAtual);
-          return colab;
-          }, {})
+      next: (equipes) => {
+        this.equipes = equipes
+      },
+      error: (e) => {
+        this.error = e.message;
       },
       complete: () => {
         this.load = false;
         this.state = 'final';
+        this.enviaAllEquipes.emit(this.equipes);
       }
     })
   }
-  */
 
   getEquipesFiltradas(){
     this.equipes = this.equipesFiltradas;

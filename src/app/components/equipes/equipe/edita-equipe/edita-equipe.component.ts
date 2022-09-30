@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Team } from 'src/app/shared/interfaces/IBackEnd/Team';
 import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
+import { IContributorDTO } from 'src/app/shared/interfaces/IFrontEnd/IContribuidorDTO';
 
 @Component({
   selector: 'app-edita-equipe',
@@ -17,15 +18,15 @@ import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 export class EditaEquipeComponent implements OnInit {
   formEquipe!: FormGroup;
 
-  equipe!: Team[];
+  equipe!: Team;
 
   formColaborado!: FormGroup;
 
   idEquipe!: string;
 
-  colaboradoresAssociados: Contributor[] = [];
+  colaboradoresAssociados: IContributorDTO[] = [];
 
-  colaboradoresNovos: Contributor[] = [];
+  colaboradoresNovos: IContributorDTO[] = [];
 
   constructor(private service: EquipesService, private router: Router, private route: ActivatedRoute) { }
 
@@ -51,20 +52,20 @@ export class EditaEquipeComponent implements OnInit {
         this.equipe = equipe;
       },
       complete: () => {
+        if(this.equipe.contributors) {
+          console.log("Entrou aqui")
+          for(let j in this.equipe.contributors){
+            console.log(this.equipe.contributors[j])
+            this.colaboradoresAssociados.push({ name: this.equipe.contributors[j].name, office: this.equipe.contributors[j].office, team: this.equipe.contributors[j].team!.id });
+          }
+        }
+          console.log("não entrouuuu")
+          console.log(this.colaboradoresAssociados)
         this.formEquipe = new FormGroup({
-          'id': new FormControl(this.equipe[0].id),
-          'name': new FormControl(this.equipe[0].name, Validators.required),
+          'id': new FormControl(this.equipe.id),
+          'name': new FormControl(this.equipe.name, Validators.required),
           'contributors': new FormArray([])
         });
-        this.getColaboradoresDaEquipe();
-      }
-    });
-  }
-
-  getColaboradoresDaEquipe(){
-    this.service.getColaboradoresdaEquipe(this.idEquipe).subscribe({
-      next: (colaboradores) => {
-        this.colaboradoresAssociados = colaboradores;
       }
     });
   }
@@ -81,7 +82,7 @@ export class EditaEquipeComponent implements OnInit {
 
   excluirColaboradoDaEquipe(colab: string){
     // Fazer verificação para excluir local ou no banco!
-    /*
+
     if(typeof colab === 'number'){
       this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: any) => {
         return colaboradores.id_colaborado !== colab;
@@ -93,7 +94,7 @@ export class EditaEquipeComponent implements OnInit {
         return colaboradores.nome_colaborado !== colab;
       })
     }
-    */
+
 
     if(typeof colab === 'string'){
       this.colaboradoresNovos = this.colaboradoresNovos.filter((colaboradores: any) => {
@@ -126,8 +127,8 @@ export class EditaEquipeComponent implements OnInit {
     });
   }
 
-  criarColaboradorAssociado(formGroup: FormGroup){
-    this.service.postcriarColaboradorAssociado(formGroup).subscribe({
+  criarColaboradorAssociado(contributors: IContributorDTO[]){
+    this.service.postcriarColaboradorAssociado(contributors).subscribe({
       complete: () => {
         this.router.navigate(['/equipes']);
       }

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Team } from 'src/app/shared/interfaces/IBackEnd/Team';
 
 import { ProjetosService } from 'src/app/services/project.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-novoprojeto',
@@ -24,7 +25,7 @@ export class NovoprojetoComponent implements OnInit {
     this.getEquipesSemProjetos();
     this.formProjeto = new FormGroup({
       'name': new FormControl(null, Validators.required),
-      'idEquipe': new FormControl(null)
+      'team': new FormControl(null)
     });
   }
 
@@ -37,7 +38,7 @@ export class NovoprojetoComponent implements OnInit {
   }
 
   postProjeto() {
-    this.service.postCriarProjeto(this.formProjeto.value).subscribe({
+    this.service.postCriarProjeto({ name: this.formProjeto.value.name, team: this.formProjeto.value.team }).subscribe({
       complete: () => {
         this.router.navigate(['/projetos']);
       }

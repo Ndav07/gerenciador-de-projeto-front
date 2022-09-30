@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
+import { IContributorDTO } from 'src/app/shared/interfaces/IFrontEnd/IContribuidorDTO';
 
 
 @Component({
@@ -20,15 +21,12 @@ export class NovaequipeComponent implements OnInit {
 
   formColaborado!: FormGroup;
 
-  idEquipe?: number;
-
   colaboradoresAssociados: Contributor[] = [];
 
   constructor(private service: EquipesService, private router: Router) { }
 
   ngOnInit(): void {
     this.formEquipe = new FormGroup({
-      'id': new FormControl(null),
       'name': new FormControl(null, Validators.required),
       'contributors': new FormArray([])
     });
@@ -41,7 +39,6 @@ export class NovaequipeComponent implements OnInit {
   }
 
   adicionaColaborado(){
-    this.formColaborado.value.id_equipe = this.idEquipe;
     this.colaboradoresAssociados.push(this.formColaborado.value);
     this.limparFormularioColaborador();
   }
@@ -57,19 +54,21 @@ export class NovaequipeComponent implements OnInit {
   }
 
   onSubmit(){
-    for(let j in this.colaboradoresAssociados){
-      this.formColaborado = new FormGroup({
-        'name': new FormControl(this.colaboradoresAssociados[j].name),
-        'office': new FormControl(this.colaboradoresAssociados[j].office),
-        'team': new FormControl(this.colaboradoresAssociados[j].team)
-      });
-      (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
-    }
-    this.formEquipe.value.id_equipe = this.idEquipe;
-    this.service.postCriaEquipe(this.formEquipe.value).subscribe({
+    this.service.postCriaEquipe({name: this.formEquipe.value.name}).subscribe({
+      next: (equipe) => {
+        console.log(equipe)
+        for(let j in this.colaboradoresAssociados){
+          this.formColaborado = new FormGroup({
+            'name': new FormControl(this.colaboradoresAssociados[j].name),
+            'office': new FormControl(this.colaboradoresAssociados[j].office),
+            'team': new FormControl(equipe.id)
+          });
+          (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
+        }
+      },
       complete: () => {
-        if(this.formEquipe.value.colaboradores.length > 0){
-          this.criarColaboradorAssociado(this.formEquipe.value);
+        if(this.formEquipe.value.contributors.length > 0){
+          this.criarColaboradorAssociado(this.formEquipe.value.contributors);
         } else {
           this.router.navigate(['/equipes']);
         }
@@ -77,16 +76,11 @@ export class NovaequipeComponent implements OnInit {
     });
   }
 
-  criarColaboradorAssociado(formGroup: FormGroup){
-    this.service.postcriarColaboradorAssociado(formGroup).subscribe({
+  criarColaboradorAssociado(contributors: IContributorDTO[]){
+    this.service.postcriarColaboradorAssociado(contributors).subscribe({
       complete: () => {
         this.router.navigate(['/equipes']);
       }
     })
-  }
-
-  onFile(e: any){
-    const file = e.target.files[0];
-    this.formColaborado.patchValue({url_img: file});
   }
 }

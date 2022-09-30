@@ -22,15 +22,16 @@ export class EditaProjetoComponent implements OnInit {
 
   formProjeto!: FormGroup;
 
-  formProjetoAntigo!: FormGroup;
+  //formProjetoAntigo!: FormGroup;
 
   constructor(private service: ProjetosService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProjetosId();
+  }
 
   getProjetosId() {
     const id = String(this.route.snapshot.paramMap.get('id'));
-
     this.service.getProjetoId(id).subscribe({
       next: (projeto) => {
         this.projeto = projeto;
@@ -41,52 +42,29 @@ export class EditaProjetoComponent implements OnInit {
           'name': new FormControl(this.projeto.name, Validators.required),
           'team': new FormControl(this.projeto.team?.id)
         });
+        /*
+        Possibilidade de implementar melhorias
         this.formProjetoAntigo = new FormGroup({
           'id': new FormControl(this.projeto.id),
           'name': new FormControl(this.projeto.name),
           'team': new FormControl(this.projeto.team?.id)
         });
-        this.getEquipesSemProjetos();
+        */
+       this.getEquipesSemProjetos();
       }
     });
   }
 
-  getEquipesSemProjetos(){
+  getEquipesSemProjetos() {
     this.service.getEquipesSemProjetos().subscribe((equipes) => (this.equipes = equipes));
   }
 
-  onSubmit(){
-    if(this.projeto === null && this.formProjeto.value.team !== this.projeto.team?.id){
-      this.putAssociarProjetoEquipe();
-    } else if(this.formProjeto.value.team !== null && this.formProjeto.value.team !== this.projeto.team?.id){
-      this.putLimparCampoProjetoDaEquipeAntiga();
-    } else{
-      this.putProjeto();
-    }
+  onSubmit() {
+    this.putProjeto();
   }
 
   putProjeto() {
-    this.service.putProjeto(this.formProjeto.value).subscribe({
-      complete: () => {
-        this.router.navigate(['/projetos']);
-      }
-    });
-  }
-
-  putLimparCampoProjetoDaEquipeAntiga(){
-    this.service.putEquipeAntiga(this.formProjetoAntigo.value).subscribe({
-      complete: () => {
-        if(this.formProjeto.value.id_equipe !== ''){
-          this.putAssociarProjetoEquipe();
-        } else{
-          this.router.navigate(['/projetos']);
-        }
-      }
-    })
-  }
-
-  putAssociarProjetoEquipe(){
-    this.service.putEquipeProjeto(this.formProjeto.value).subscribe({
+    this.service.putProjeto({ name: this.formProjeto.value.name, id: this.formProjeto.value.id, team: this.formProjeto.value.team }).subscribe({
       complete: () => {
         this.router.navigate(['/projetos']);
       }

@@ -30,11 +30,17 @@
 
             <form [formGroup]="formColaborado" (ngSubmit)="adicionaColaborado()">
               <div class="addColaborador">
+
+
                 <div class="foto">
-                  <input type="file" (change)="onFile($event)">
+                  <!--
+                    Adicionar no editar colaborador
+                    <input type="file" (change)="onFile($event)">
+                  -->
                 </div>
+
                 <div class="nome">
-                  <input type="text" placeholder="Nome" formControlName="name" id="name">
+                  <input type="text" placeholder="Nome" formControlName="name">
                 </div>
                 <div class="atribuicao">
                   <input type="text" placeholder="Atribuição" formControlName="office">

@@ -16,7 +16,7 @@
                   <h3>Equipe</h3>
                 </div>
 
-                <select class="equipes" formControlName="idEquipe">
+                <select class="equipes" formControlName="team">
                     <option value="" disabled selected hidden>Selecione a equipe</option>
                     <option *ngFor="let equipe of equipes" [value]="equipe.id">{{ equipe.name }}</option>
                 </select>
