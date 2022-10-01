@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Team } from 'src/app/shared/interfaces/IBackEnd/Team';
-import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
+
 import { IContributorDTO } from 'src/app/shared/interfaces/IFrontEnd/IContribuidorDTO';
 
 @Component({
@@ -21,8 +21,6 @@ export class EditaEquipeComponent implements OnInit {
   equipe!: Team;
 
   formColaborado!: FormGroup;
-
-  idEquipe!: string;
 
   colaboradoresAssociados: IContributorDTO[] = [];
 
@@ -46,21 +44,16 @@ export class EditaEquipeComponent implements OnInit {
 
   getEquipe(){
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.idEquipe = id;
-    this.service.getEquipeId(this.idEquipe).subscribe({
+    this.service.getEquipeId(id).subscribe({
       next: (equipe) => {
         this.equipe = equipe;
       },
       complete: () => {
-        if(this.equipe.contributors) {
-          console.log("Entrou aqui")
-          for(let j in this.equipe.contributors){
-            console.log(this.equipe.contributors[j])
-            this.colaboradoresAssociados.push({ name: this.equipe.contributors[j].name, office: this.equipe.contributors[j].office, team: this.equipe.contributors[j].team!.id });
+        if(this.equipe.contributors!.length > 0) {
+          for(let j in this.equipe.contributors!){
+            this.colaboradoresAssociados.push({ id: this.equipe.contributors[j].id, name: this.equipe.contributors[j].name, office: this.equipe.contributors[j].office, team: this.equipe.id });
           }
         }
-          console.log("não entrouuuu")
-          console.log(this.colaboradoresAssociados)
         this.formEquipe = new FormGroup({
           'id': new FormControl(this.equipe.id),
           'name': new FormControl(this.equipe.name, Validators.required),
@@ -80,26 +73,20 @@ export class EditaEquipeComponent implements OnInit {
     this.formColaborado.reset();
   }
 
-  excluirColaboradoDaEquipe(colab: string){
-    // Fazer verificação para excluir local ou no banco!
-
-    if(typeof colab === 'number'){
-      this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: any) => {
-        return colaboradores.id_colaborado !== colab;
+  excluirColaboradoDaEquipe(colab: IContributorDTO) {
+    console.log(colab)
+    if(colab.id) {
+      this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: IContributorDTO) => {
+        return colaboradores.name !== colab.name;
       })
-      this.excluirColaboradoNoBanco(colab);
-    }
-    else{
-      this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: any) => {
-        return colaboradores.nome_colaborado !== colab;
+      this.excluirColaboradoNoBanco(colab.id);
+    } else {
+      this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: IContributorDTO) => {
+        return colaboradores.name !== colab.name;
       })
-    }
-
-
-    if(typeof colab === 'string'){
-      this.colaboradoresNovos = this.colaboradoresNovos.filter((colaboradores: any) => {
-        return colaboradores.nome_colaborado !== colab;
-      });
+      this.colaboradoresNovos = this.colaboradoresNovos.filter((colaboradores: IContributorDTO) => {
+        return colaboradores.name !== colab.name;
+      })
     }
   }
 
@@ -112,11 +99,11 @@ export class EditaEquipeComponent implements OnInit {
       this.formColaborado = new FormGroup({
         'name': new FormControl(this.colaboradoresNovos[j].name),
         'office': new FormControl(this.colaboradoresNovos[j].office),
-        'id': new FormControl(this.idEquipe)
+        'id': new FormControl(this.equipe.id)
       });
       (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
     }
-    this.service.putEquipe(this.formEquipe.value).subscribe({
+    this.service.putEquipe({ id: this.equipe.id!, name: this.formEquipe.value.name }).subscribe({
       complete: () => {
         if(this.formEquipe.value.colaboradores.length > 0){
           this.criarColaboradorAssociado(this.formEquipe.value);
