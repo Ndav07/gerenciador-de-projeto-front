@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -20,9 +20,14 @@ export class AuthComponent implements OnInit {
 
   loader: boolean = false;
 
+  @Output() authTrue: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.service.isAuth()) {
+      this.router.navigate(['/projetos']);
+    }
     this.formLogin = new FormGroup({
       'email' : new FormControl(null, [Validators.email, Validators.required]),
       'password' : new FormControl(null, Validators.required)
@@ -32,8 +37,11 @@ export class AuthComponent implements OnInit {
   logar(){
     this.loader = true;
     this.service.postVerificacao(this.formLogin.value.email, this.formLogin.value.password).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+      },
       error: () => {
-        alert('usuário não encontrado');
+        alert("Email or password incorrect!");
         location.reload();
       },
       complete: () => {

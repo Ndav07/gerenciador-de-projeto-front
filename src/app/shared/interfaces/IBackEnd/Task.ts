@@ -7,5 +7,5 @@ export interface Task {
   description?: string;
   status: string;
   project: Project;
-  contribuidor?: Contributor;
+  contributor?: Contributor;
 }

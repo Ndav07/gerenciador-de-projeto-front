@@ -37,7 +37,7 @@ export class ModalCriarTarefaComponent implements OnInit {
     });
   }
 
-  getColaboradoresdaEquipe(){
+  getColaboradoresdaEquipe() {
     if(this.id_equipe){
       this.service.getColaboradoresdaEquipe(this.id_equipe).subscribe((colaboradores) => (this.colaboradores = colaboradores));
     }
@@ -48,7 +48,7 @@ export class ModalCriarTarefaComponent implements OnInit {
   }
 
   criaTarefa(){
-    this.service.postCriarTarefa({ name: this.formTarefa.value.name, status: this.formTarefa.value.status, description: this.formTarefa.value.description, contributor: this.formTarefa.value.contributor }).subscribe({
+    this.service.postCriarTarefa({ name: this.formTarefa.value.name, project: this.id_projeto, status: this.formTarefa.value.status, description: this.formTarefa.value.description, contributor: this.formTarefa.value.contributor }).subscribe({
       complete: () => {
         this.carregarTarefas.emit();
       }

@@ -9,16 +9,17 @@ import { EditaEquipeComponent } from './components/equipes/equipe/edita-equipe/e
 import { EditaProjetoComponent } from './components/projetos/projeto/edita-projeto/edita-projeto.component';
 import { PaginaNaoEncontradaComponent } from './components/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/projetos', pathMatch: 'full'},
+  {path: '', redirectTo: '/auth', pathMatch: 'full'},
   {path: 'auth', component: AuthComponent},
-  {path: 'projetos', component: ProjetosComponent},
-  {path: 'equipes', component: EquipesComponent},
-  {path: 'novoProjeto', component: NovoprojetoComponent},
-  {path: 'novaEquipe', component: NovaequipeComponent},
-  {path: 'editaEquipe/:id', component: EditaEquipeComponent},
-  {path: 'editaProjeto/:id', component: EditaProjetoComponent},
+  {path: 'projetos', component: ProjetosComponent, canActivate: [AuthGuard]},
+  {path: 'equipes', component: EquipesComponent, canActivate: [AuthGuard]},
+  {path: 'novoProjeto', component: NovoprojetoComponent, canActivate: [AuthGuard]},
+  {path: 'novaEquipe', component: NovaequipeComponent, canActivate: [AuthGuard]},
+  {path: 'editaEquipe/:id', component: EditaEquipeComponent, canActivate: [AuthGuard]},
+  {path: 'editaProjeto/:id', component: EditaProjetoComponent, canActivate: [AuthGuard]},
   {path: 'pag-nao-encontrada', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: '/pag-nao-encontrada'}
 ];

@@ -10,7 +10,7 @@
           <div *ngIf="tar.status == 'afazeres'" class="top flex">
               <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.contribuidor?.name }}</span>
+                <span>{{ tar.contributor?.name}}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
                 <img (click)="editTarefa(tar)" src="../../../assets/edit.svg">
                 <img (click)="mudarTarefaDeStatus(statusAfazeres, tar.id!)" src="../../../assets/seta-direita.svg">
@@ -29,7 +29,7 @@
           <div *ngIf="tar.status == 'andamento'" class="top flex">
               <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.contribuidor?.name }}</span>
+                <span>{{ tar.contributor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
                 <img (click)="editTarefa(tar)" src="../../../assets/edit.svg">
                 <img (click)="mudarTarefaDeStatus(statusAndamento, tar.id!)" src="../../../assets/seta-direita.svg">
@@ -48,7 +48,7 @@
           <div *ngIf="tar.status == 'concluidas'" class="top flex">
               <li class="nomeTarefa">{{ tar.name }}</li>
               <div class="flex">
-                <span>{{ tar.contribuidor?.name }}</span>
+                <span>{{ tar.contributor?.name }}</span>
                 <img class="colaborador-tarefa" src="../../../assets/icon.svg">
                 <img (click)="deletarTarefa(tar.id!)" src="../../../assets/excluir.svg">
               </div>

@@ -64,7 +64,7 @@ export class EquipesService {
 
   // Put
   putEquipe(equipe: IEquipeDTO): Observable<void> {
-    return this.http.put<void>(`${this.editarEquipe}`, equipe);
+    return this.http.patch<void>(`${this.editarEquipe}`, equipe);
   }
 
   // Delete

@@ -33,7 +33,7 @@ export class EditaEquipeComponent implements OnInit {
     this.formColaborado = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'office': new FormControl(null),
-      'team': new FormControl(null)
+      'team': new FormControl()
     });
     this.formEquipe = new FormGroup({
       'id': new FormControl(null),
@@ -74,7 +74,6 @@ export class EditaEquipeComponent implements OnInit {
   }
 
   excluirColaboradoDaEquipe(colab: IContributorDTO) {
-    console.log(colab)
     if(colab.id) {
       this.colaboradoresAssociados = this.colaboradoresAssociados.filter((colaboradores: IContributorDTO) => {
         return colaboradores.name !== colab.name;
@@ -95,26 +94,26 @@ export class EditaEquipeComponent implements OnInit {
   }
 
   onSubmit(){
-    for(let j in this.colaboradoresNovos){
-      this.formColaborado = new FormGroup({
-        'name': new FormControl(this.colaboradoresNovos[j].name),
-        'office': new FormControl(this.colaboradoresNovos[j].office),
-        'id': new FormControl(this.equipe.id)
-      });
-      (<FormArray>this.formEquipe.get('contributors')).push(this.formColaborado);
-    }
+    this.colaboradoresNovos = this.colaboradoresNovos.map(contributor => {
+      return {
+        name: contributor.name,
+        office: contributor.office,
+        team: this.equipe.id
+      }
+    })
     this.service.putEquipe({ id: this.equipe.id!, name: this.formEquipe.value.name }).subscribe({
       complete: () => {
-        if(this.formEquipe.value.colaboradores.length > 0){
-          this.criarColaboradorAssociado(this.formEquipe.value);
+        if(this.colaboradoresNovos.length > 0) {
+          this.criarColaboradorAssociado(this.colaboradoresNovos);
         } else {
           this.router.navigate(['/equipes']);
         }
       }
     });
+
   }
 
-  criarColaboradorAssociado(contributors: IContributorDTO[]){
+  criarColaboradorAssociado(contributors: IContributorDTO[]) {
     this.service.postcriarColaboradorAssociado(contributors).subscribe({
       complete: () => {
         this.router.navigate(['/equipes']);

@@ -5,8 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 import { ProjetosService } from 'src/app/services/project.service';
-import { ITarefaDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
 
+import { ITarefaDTO } from 'src/app/shared/interfaces/IFrontEnd/ITarefaDTO';
 
 @Component({
   selector: 'app-modal-editar-tarefa',
@@ -37,7 +37,14 @@ export class ModalEditarTarefaComponent implements OnInit {
 
   getColaboradoresdaEquipe() {
     if(this.tarefa.team){
-      this.service.getColaboradoresdaEquipe(this.tarefa.team).subscribe((colaboradores) => (this.colaboradores = colaboradores));
+      this.service.getColaboradoresdaEquipe(this.tarefa.team).subscribe((colaboradores) => {
+        this.colaboradores = colaboradores;
+        if(this.tarefa.contributor){
+          this.colaboradores = this.colaboradores.filter(contribuidor => {
+             return contribuidor.id !== this.tarefa.contributor;
+          });
+        }
+      });
     }
   }
 
