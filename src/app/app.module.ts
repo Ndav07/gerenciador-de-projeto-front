@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +27,7 @@ import { PaginaNaoEncontradaComponent } from './components/pagina-nao-encontrada
 import { AuthComponent } from './components/auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/spinner/loading-spinner.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TokenInterceptor } from './inteceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,12 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
   ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    JwtHelperService
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

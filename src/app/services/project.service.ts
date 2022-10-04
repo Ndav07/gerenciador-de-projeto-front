@@ -54,14 +54,10 @@ export class ProjetosService {
   private deletaTarefa = `${this.baseApiUrl}/tasks/`;
 
   constructor(private http: HttpClient) { }
-  token = localStorage.getItem('token');
-  tokenHeaders = `Bearer ${this.token}`
 
   //Get
   getEquipesSemProjetos(): Observable<Team[]> {
-    return this.http.get<Team[]>(this.equipesSemProjetos, {
-      params: new HttpParams().set('auth', this.tokenHeaders)
-    });
+    return this.http.get<Team[]>(this.equipesSemProjetos);
   }
 
   getProjetos(): Observable<Project[]> {

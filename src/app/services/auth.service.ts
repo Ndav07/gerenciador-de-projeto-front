@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -23,6 +23,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
+  authTrue: EventEmitter<boolean> = new EventEmitter();
+
   postCadastrar(formGroup: FormGroup): Observable<FormGroup> {
     return this.http.post<FormGroup>(`${this.cadastrar}`, formGroup);
   }
@@ -37,8 +39,9 @@ export class AuthService {
   isAuth(): boolean {
     const token = localStorage.getItem('token');
     if(!localStorage.getItem('token') || this.jwtHelper.isTokenExpired(token!)) {
-      return false
-    };
+      return false;
+    }
+    this.authTrue.emit(true);
     return true;
   }
 

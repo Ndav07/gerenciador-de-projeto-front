@@ -4,11 +4,6 @@
     <li><a routerLink="/projetos" routerLinkActive="active" data-testid="rotaProjeto" *ngIf="autenticacao">Projetos</a></li>
     <li><a routerLink="/equipes" routerLinkActive="active" *ngIf="autenticacao">Equipes</a></li>
 
-    <!--
-    <li><a routerLink="/projetos" routerLinkActive="active" data-testid="rotaProjeto">Projetos</a></li>
-    <li><a routerLink="/equipes" routerLinkActive="active" >Equipes</a></li>
-    -->
-
     <div class="logout">
       <li><a *ngIf="autenticacao" (click)="ngOnDestroy()">Logout</a></li>
     </div>

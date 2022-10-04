@@ -1,14 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
-
-import { User } from 'src/app/shared/interfaces/IBackEnd/User';
-
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -19,8 +15,6 @@ export class AuthComponent implements OnInit {
   formLogin!: FormGroup;
 
   loader: boolean = false;
-
-  @Output() authTrue: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private service: AuthService, private router: Router) { }
 
