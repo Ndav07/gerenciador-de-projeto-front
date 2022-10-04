@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -36,6 +36,7 @@ export class EquipesService {
   //Put
   private editarEquipe = `${this.baseApiUrl}/teams`;
 
+  private editarColaborador = `${this.baseApiUrl}/contributors`;
 
   //Delete
   private deletaEquipe = `${this.baseApiUrl}/teams/`;
@@ -65,6 +66,10 @@ export class EquipesService {
   // Put
   putEquipe(equipe: IEquipeDTO): Observable<void> {
     return this.http.patch<void>(`${this.editarEquipe}`, equipe);
+  }
+
+  putColaborador(contributor: IContributorDTO): Observable<void> {
+    return this.http.put<void>(`${this.editarColaborador}`, contributor);
   }
 
   // Delete

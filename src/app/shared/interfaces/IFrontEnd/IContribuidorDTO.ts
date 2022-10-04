@@ -3,4 +3,5 @@ export interface IContributorDTO {
   name: string;
   office: string;
   team?: string;
+  avatar?: File;
 }

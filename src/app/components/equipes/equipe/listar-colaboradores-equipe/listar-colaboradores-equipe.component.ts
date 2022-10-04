@@ -9,6 +9,9 @@ import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
   styleUrls: ['./listar-colaboradores-equipe.component.css']
 })
 export class ListarColaboradoresEquipeComponent implements OnInit {
+  editColaborador: boolean = false;
+
+  colaborador?: Contributor;
 
   @Input() colaboradoresDaEquipe?: Contributor[];
   @Output() recarregarColaboradores: EventEmitter<Event> = new EventEmitter();
@@ -23,5 +26,14 @@ export class ListarColaboradoresEquipeComponent implements OnInit {
         this.recarregarColaboradores.emit();
       }
     });
+  }
+
+  editarColaborador(colab: Contributor) {
+    this.colaborador = colab;
+    this.editColaborador = !this.editColaborador;
+  }
+
+  fecharModal(){
+    this.editColaborador = false;
   }
 }

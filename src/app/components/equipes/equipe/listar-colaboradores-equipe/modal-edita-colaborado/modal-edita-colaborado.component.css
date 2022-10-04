@@ -1,0 +1,128 @@
+.backgroud-modal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.boxForm{
+  border: rgba(0, 0, 0, 0.10) solid 1px;
+  width: 35rem;
+  height: 30rem;
+  border-radius: .5rem;
+  text-align: center;
+  background: #F4F5FA;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.boxForm h2{
+  color: #F56E28;
+  margin-bottom: 1rem;
+}
+
+.fechar{
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all ease 300ms;
+}
+
+.fechar:hover{
+  opacity: 1;
+}
+
+form{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addColaborador div{
+    margin-bottom: .5rem;
+    cursor: pointer;
+    transition: all ease 300ms;
+    font-size: 1rem;
+    width: 30rem;
+    border-radius: .5rem;
+}
+
+.foto{
+    margin: 3rem;
+}
+
+.nome{
+  display: flex;
+  width: 25rem;
+  margin-bottom: 1rem;
+  width: 80%;
+  max-width: 25rem;
+}
+
+.nome input{
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #F4F5FA;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.atribuicao{
+  display: flex;
+  width: 25rem;
+  margin-bottom: 1rem;
+  width: 80%;
+  max-width: 25rem;
+}
+
+.atribuicao input{
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #F4F5FA;
+  border-bottom: rgba(0, 0, 0, 0.10) solid 1px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.finalizar{
+  height: 4rem;
+}
+
+.finalizar button{
+  height: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: .5rem;
+  border-radius: .3rem;
+  border: none;
+  background: #F56E28;
+  cursor: pointer;
+  transition: all ease 500ms;
+  color: #ffff;
+}
+
+.finalizar button:hover{
+  background: #083D93;
+}
+
+.erroValid{
+  margin-bottom: 1rem;
+  font-size: .8rem;
+  color: #f5282898;
+}

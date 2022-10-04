@@ -1,0 +1,31 @@
+<div class="backgroud-modal">
+  <div class="boxForm">
+    <img class="fechar" (click)="fecharModal()" src="../../../assets/x.svg">
+    <h2>Editar Colaborador</h2>
+    <form [formGroup]="formColaborador" (ngSubmit)="onSubmit()">
+        <div class="foto">
+            <input type="file" (change)="onFile($event)">
+        </div>
+        <div class="nome">
+            <input type="text" formControlName="name" placeholder="Nome do colaborador">
+        </div>
+
+        <div *ngIf="!formColaborador.get('name')?.valid && formColaborador.get('name')?.touched">
+          <p class="erroValid">O nome do colaborador é obrigatório.</p>
+        </div>
+
+        <div class="atribuicao">
+            <input type="text" formControlName="office" placeholder="Sua atribuição">
+        </div>
+
+        <div *ngIf="!formColaborador.get('office')?.valid && formColaborador.get('office')?.touched">
+          <p class="erroValid">A atribuição do colaborador é obrigatório.</p>
+        </div>
+
+        <div class="finalizar">
+          <button *ngIf="!formColaborador.get('name')?.valid" disabled type="submit">Finalizar</button>
+            <button *ngIf="formColaborador.get('name')?.valid" type="submit">Finalizar</button>
+        </div>
+    </form>
+  </div>
+</div>

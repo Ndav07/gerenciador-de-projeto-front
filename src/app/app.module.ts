@@ -17,7 +17,7 @@ import { NovaequipeComponent } from './components/equipes/novaequipe/novaequipe.
 import { ListaColaboradoresComponent } from './components/projetos/projeto/lista-colaboradores/lista-colaboradores.component';
 import { ListaTarefasComponent } from './components/projetos/projeto/lista-tarefas/lista-tarefas.component';
 import { EditaEquipeComponent } from './components/equipes/equipe/edita-equipe/edita-equipe.component';
-import { ModalEditaColaboradoComponent } from './components/equipes/equipe/edita-equipe/modal-edita-colaborado/modal-edita-colaborado.component';
+import { ModalEditaColaboradoComponent } from './components/equipes/equipe/listar-colaboradores-equipe/modal-edita-colaborado/modal-edita-colaborado.component';
 import { ListarColaboradoresEquipeComponent } from './components/equipes/equipe/listar-colaboradores-equipe/listar-colaboradores-equipe.component';
 import { EditaProjetoComponent } from './components/projetos/projeto/edita-projeto/edita-projeto.component';
 import { ConfimarExclusaoComponent } from './components/modal-confimar-exclusao/confimar-exclusao.component';

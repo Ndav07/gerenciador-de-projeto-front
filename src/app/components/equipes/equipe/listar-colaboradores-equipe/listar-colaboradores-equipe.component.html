@@ -4,7 +4,11 @@
         <li class="foto-colaborador" style="background-image: url(../../../assets/people1.jpg)"></li>
         <li> {{ colab.name }} </li>
         <li> {{ colab.office }} </li>
+        <li><img src="../../../../../assets/edit.svg" class="excluir-colaborado" (click)="editarColaborador(colab)"></li>
         <li><img class="excluir-colaborado" src="../../../assets/excluir.svg" (click)="deletarColaborado(colab.id!)"></li>
     </div>
   </ul>
 </div>
+
+
+<app-modal-edita-colaborado *ngIf="editColaborador" [colaborado]="colaborador" (fechaModal)="fecharModal()"></app-modal-edita-colaborado>
