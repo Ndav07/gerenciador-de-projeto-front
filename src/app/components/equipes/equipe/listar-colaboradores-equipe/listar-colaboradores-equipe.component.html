@@ -11,4 +11,4 @@
 </div>
 
 
-<app-modal-edita-colaborado *ngIf="editColaborador" [colaborado]="colaborador" (fechaModal)="fecharModal()"></app-modal-edita-colaborado>
+<app-modal-edita-colaborado *ngIf="editColaborador" [colaborado]="colaborador" (fechaModal)="fecharModal()" (edicaoColaborado)="recarregarColaboradores.emit()"></app-modal-edita-colaborado>

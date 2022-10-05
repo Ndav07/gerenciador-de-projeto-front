@@ -38,6 +38,8 @@ export class EquipesService {
 
   private editarColaborador = `${this.baseApiUrl}/contributors`;
 
+  private editarColaboradorSemAvatar = `${this.baseApiUrl}/contributors/withoutAvatar`;
+
   //Delete
   private deletaEquipe = `${this.baseApiUrl}/teams/`;
 
@@ -68,8 +70,12 @@ export class EquipesService {
     return this.http.patch<void>(`${this.editarEquipe}`, equipe);
   }
 
-  putColaborador(contributor: IContributorDTO): Observable<void> {
+  putColaborador(contributor: FormData): Observable<void> {
     return this.http.put<void>(`${this.editarColaborador}`, contributor);
+  }
+
+  putColaboradorSemAvatar(contributor: IContributorDTO): Observable<void> {
+    return this.http.put<void>(`${this.editarColaboradorSemAvatar}`, contributor);
   }
 
   // Delete

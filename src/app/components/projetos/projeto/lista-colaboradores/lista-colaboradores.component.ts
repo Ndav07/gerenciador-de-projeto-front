@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Contributor } from 'src/app/shared/interfaces/IBackEnd/Contributor';
 
 @Component({
   selector: 'app-lista-colaboradores',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-colaboradores.component.css']
 })
 export class ListaColaboradoresComponent implements OnInit {
+  @Input() colaboradores?: Contributor[];
+
+  baseApiUrl = "http://localhost:3333/";
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

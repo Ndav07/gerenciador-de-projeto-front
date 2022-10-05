@@ -1,8 +1,5 @@
 <ul class="colaboradores">
-  <li style="background-image: url(../../../assets/people1.jpg)"></li>
-  <li style="background-image: url(../../../assets/people3.jpg)"></li>
-  <li style="background-image: url(../../../assets/people2.jpg)"></li>
-  <li style="background-image: url(../../../assets/people4.jpg)"></li>
-  <li style="background-image: url(../../../assets/people5.jpg)"></li>
-  <li style="background-image: url(../../../assets/people6.jpg)"></li>
+  <div *ngFor="let colaborado of colaboradores">
+    <li *ngIf="colaborado.avatar" style="background-image: url({{baseApiUrl}}tmp/avatar/{{colaborado.avatar}})"></li>
+  </div>
 </ul>

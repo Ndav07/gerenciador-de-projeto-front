@@ -8,7 +8,7 @@
 
    <h3>{{ projeto.team?.name }}</h3>
 
-    <app-lista-colaboradores *ngIf="projeto.team"></app-lista-colaboradores>
+    <app-lista-colaboradores *ngIf="projeto.team" [colaboradores]="projeto.team.contributors!"></app-lista-colaboradores>
 
     <div class="tarefas">
       <h3>Tarefas</h3>
