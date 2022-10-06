@@ -1,5 +1,8 @@
 # GerenciadorDeProjetoFront
-<<<<<<< HEAD
-=======
 
->>>>>>> 9667c1cf4b6e2041f6ef134b12df58cfcb96e20b
+## Bug render imagens!!!
+
+## Start
+### ng serve
+
+<p>Consumindo API: https://github.com/Ndav07/back-end-gerenciador-de-projetos.git</p>

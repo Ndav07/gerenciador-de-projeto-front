@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'https://gerenciado-projetos.herokuapp.com/'
+  baseApiUrl: ''
 };
 
 /*
