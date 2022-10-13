@@ -25,12 +25,13 @@
 
         <select *ngIf="colaboradores.length > 0" class="colaboradores" formControlName="contributor">
           <option [value]="tarefa.contributor" *ngIf="tarefa.contributor" selected disabled>{{ tarefa.contributor_name }}</option>
-          <option [value]="null" *ngIf="tarefa.contributor">Remove Colaborador</option>
+          <option value="" *ngIf="tarefa.contributor">Remove Colaborador</option>
           <option *ngFor="let colaborado of colaboradores" [value]="colaborado.id">{{ colaborado.name }}</option>
         </select>
 
         <div class="finalizar">
-            <button type="submit">Finalizar</button>
+          <button *ngIf="!formTarefa.get('name')?.valid" disabled>Finalizar</button>
+          <button *ngIf="formTarefa.get('name')?.valid" type="submit">Finalizar</button>
         </div>
     </form>
   </div>
