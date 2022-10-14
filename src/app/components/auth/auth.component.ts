@@ -49,7 +49,7 @@ export class AuthComponent implements OnInit {
     this.loader = true;
     this.service.postCadastrar(this.formLogin.value).subscribe({
       error: (err) => {
-        alert(err);
+        alert("Email or password incorrect!");
         location.reload();
       },
       complete: () => {
